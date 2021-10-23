@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    {% block meta %}
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% endblock %}
+
+    {% block extra_meta %}
+    {% endblock %}
+
+    {% block corecss %}      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
+    {% endblock %}
+
+    {% block extra_css %}
+    {% endblock %}
+
+    {% block corejs %}
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>    {% endblock %}
+
+    {% block extra_js %}
+    {% endblock %}
+
+    <title>Jordan Murray {% block extra_title %}{% endblock %}</title>
+  </head>
+  <body>
+    
+    {% block page_header %}
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+    
+    <footer>
+        <p>Copyright  2020 Heavenly Herbs Company. All Rights Reserved</p>
+    </footer>   
+  </body>
+</html>
