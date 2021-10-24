@@ -1,4 +1,4 @@
-{% load static %}
+{% load sass_tags %}
 <!doctype html>
 <html lang="en">
 
@@ -15,7 +15,7 @@
 
   {% block corecss %}
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% sass_src 'css/base.scss' %}">
   {% endblock %}
 
   {% block extra_css %}
