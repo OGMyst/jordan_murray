@@ -27,8 +27,32 @@
         width: 160px;
         padding: 8px 0;
     }
-    
+
     .primary-button > a {
         color: #3ffff3;
+    }
+}
+
+.biography {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-top: solid 6px;
+
+    * {
+        width: 1000px;
+    }
+
+    h1 {
+        padding-top: 30px;
+        padding-bottom: 20px;
+        width: 100%;
+    }
+
+    p {
+        font-weight: 200;
+        padding: 0 20px;
+        line-height: 1.7;
     }
 }

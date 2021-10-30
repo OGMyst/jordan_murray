@@ -40,6 +40,11 @@ a {
 }
 
 /* -------------- NAV RULES -------------------*/
+.nav-container{
+    position: fixed;
+    width: 100vw;
+}
+
 #main-nav {
     background-color: #030e26;
     padding: 8px 15px 10px;
@@ -67,4 +72,18 @@ a {
 .nav-text {
     font-size: 15px;
     align-self: center;
+}
+/* --------------  GENERAL RULES -------------------*/
+.container{
+    background-color: #242424;
+    padding: 10px 15px;
+}
+
+footer{
+    background-color: black;
+    padding: 8px 15px 10px;
+
+    p {
+        font-size: 12px;
+    }
 }

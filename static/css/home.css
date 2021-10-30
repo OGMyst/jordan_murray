@@ -16,7 +16,27 @@
 .button-container {
   display: flex;
   justify-content: center; }
+  .button-container .primary-button {
+    width: 160px;
+    padding: 8px 0; }
   .button-container .primary-button > a {
     color: #3ffff3; }
+
+.biography {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-top: solid 6px; }
+  .biography * {
+    width: 1000px; }
+  .biography h1 {
+    padding-top: 30px;
+    padding-bottom: 20px;
+    width: 100%; }
+  .biography p {
+    font-weight: 200;
+    padding: 0 20px;
+    line-height: 1.7; }
 
 /*# sourceMappingURL=home.css.map */
