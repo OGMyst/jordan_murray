@@ -11,9 +11,10 @@ body {
   height: 100vh;
   background-color: #000000;
   position: fixed;
-  z-index: 1;
+  z-index: -1;
   opacity: 0.4; }
 
+/* -------------- TEXT RULES -------------------*/
 h1,
 h2,
 h3,
@@ -27,6 +28,12 @@ p {
 a {
   text-decoration: none; }
 
+/* -------------- BUTTON RULES -------------------*/
+.primary-button {
+  background-color: black;
+  border-radius: 10px; }
+
+/* -------------- NAV RULES -------------------*/
 #main-nav {
   background-color: #030e26;
   padding: 8px 15px 10px;
