@@ -2,19 +2,46 @@
 body {
   background-color: #202020;
   margin: 0;
-  font-family: 'Roboto', sans-serif; }
+  font-family: "Roboto", sans-serif;
+  background: url("/media/home-background.jpg") no-repeat center center fixed;
+  background-size: cover; }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
   color: azure; }
 
+a {
+  text-decoration: none; }
+
 #main-nav {
   background-color: #030e26;
-  width: 100vw;
   padding: 10px 15px;
   display: flex; }
 
-.col-6 {
-  width: 50%; }
+.nav-logo {
+  width: 160px; }
+
+#nav-items {
+  display: flex;
+  justify-content: flex-end;
+  width: calc(100% - 160px); }
+
+.nav-item {
+  text-align: center;
+  padding: 0 20px;
+  display: flex; }
+
+.nav-item > a {
+  display: flex; }
+
+.nav-text {
+  font-size: 15px;
+  align-self: center; }
 
 /*# sourceMappingURL=base.css.map */
