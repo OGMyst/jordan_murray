@@ -1,12 +1,20 @@
 {% extends "base.html" %}
+{% load sass_tags %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% sass_src 'css/home.scss' %}">
+{% endblock %}
+
 {% block content %}
 <div class="lead-container">
     <div class="lead-content">
         <h1>Jordan Murray Percussion</h1>
         <p>I teach, perform and hire out my equipment. To make a booking click the button below to get started</p>
-        <div class="primary-button">
-            <a href="">Get Started</a>
-        </div>
+        <div class="button-container">
+            <div class="primary-button">
+                <a href="">Get Started</a>
+            </div>
+        </div>Í
     </div>
 </div>
 {% endblock %}
