@@ -15,12 +15,18 @@
 
 .button-container {
   display: flex;
-  justify-content: center; }
+  justify-content: center;
+  height: 39px; }
   .button-container .primary-button {
     width: 160px;
-    padding: 8px 0; }
-  .button-container .primary-button > a {
-    color: #3ffff3; }
+    padding: 8px 0;
+    color: #3ffff3;
+    margin-top: 2px; }
+  .button-container .primary-button:hover {
+    background-color: #1515159c;
+    color: #9fe9ff;
+    border: 2px solid;
+    margin-top: 0px; }
 
 .biography {
   text-align: center;

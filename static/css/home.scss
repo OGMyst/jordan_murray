@@ -22,14 +22,20 @@
 .button-container {
     display: flex;
     justify-content: center;
+    height: 39px;
 
     .primary-button {
         width: 160px;
         padding: 8px 0;
+        color: #3ffff3;
+        margin-top: 2px;
     }
 
-    .primary-button > a {
-        color: #3ffff3;
+    .primary-button:hover {
+        background-color: #1515159c;
+        color: #9fe9ff;
+        border: 2px solid;
+        margin-top: 0px;
     }
 }
 

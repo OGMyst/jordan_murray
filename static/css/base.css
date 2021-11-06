@@ -26,7 +26,8 @@ p {
   color: azure; }
 
 a {
-  text-decoration: none; }
+  text-decoration: none;
+  cursor: pointer; }
 
 /* -------------- BUTTON RULES -------------------*/
 .primary-button {
@@ -53,15 +54,21 @@ a {
 
 .nav-item {
   text-align: center;
-  padding: 0 20px;
+  padding: 0 10px;
   display: flex; }
-
-.nav-item > a {
-  display: flex; }
+  .nav-item a {
+    display: flex;
+    padding: 0 10px; }
+  .nav-item a:hover {
+    background-color: #6f6d6d2e;
+    border-radius: 5px; }
 
 .nav-text {
   font-size: 15px;
   align-self: center; }
+
+.nav-text:hover {
+  color: black; }
 
 /* --------------  GENERAL RULES -------------------*/
 .container {
