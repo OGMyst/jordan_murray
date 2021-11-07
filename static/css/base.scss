@@ -63,16 +63,21 @@ a {
 }
 .nav-item {
     text-align: center;
-    padding: 0 10px;
+    padding: 5px 10px;
     display: flex;
     a {
         display: flex;
         padding: 0 10px;
+        color: azure;
+        font-size: 15px;
+        margin: 2px;
     }
 
     a:hover {
-        background-color: #6f6d6d2e;
+        background-color: #7b7b7b38;
         border-radius: 5px;
+        border: 2px solid #8a8a8a5e;
+        margin: 0px;
     }
 }
 .nav-text {

@@ -54,14 +54,19 @@ a {
 
 .nav-item {
   text-align: center;
-  padding: 0 10px;
+  padding: 5px 10px;
   display: flex; }
   .nav-item a {
     display: flex;
-    padding: 0 10px; }
+    padding: 0 10px;
+    color: azure;
+    font-size: 15px;
+    margin: 2px; }
   .nav-item a:hover {
-    background-color: #6f6d6d2e;
-    border-radius: 5px; }
+    background-color: #7b7b7b38;
+    border-radius: 5px;
+    border: 2px solid #8a8a8a5e;
+    margin: 0px; }
 
 .nav-text {
   font-size: 15px;
