@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sass_processor',
     'home',
+    'booking',
 
      # The following apps are required for allauth
     'django.contrib.sites',
