@@ -1,6 +1,14 @@
+import datetime
+
 from django.db import models
 from django.db.models.fields import CharField
 class Enquiry(models.Model):
+    """
+    New bookings are treated as enquiries and won't be saved to a user until it's confirmed
+    """
+    class Meta:
+        verbose_name_plural = 'Enquiries'
+    
     BOOKING_TYPES =(
         ('TEACHING', 'Teaching'),
         ('PERFORMANCE', 'Performance'),
@@ -13,12 +21,9 @@ class Enquiry(models.Model):
         ('300-400', '300-400'),
         ('400+', '400+'),
     )
+
     booking_type = models.CharField(max_length=32, null=False, blank=False, choices=BOOKING_TYPES)
-    email = models.EmailField(max_length=254)
-    full_name = models.CharField(max_length=50, null=False, blank=False)
-    dates = models.JSONField(encoder=None, decoder=None)
-    times = models.TimeField(auto_now=False, auto_now_add=False,)
-    location = CharField(max_length=50, null=False, blank=False)
-    budget = models.CharField(max_length=32, null=False, blank=False, choices=BUDGET_RANGES)
-    equipment = models.JSONField(encoder=None, decoder=None)
-    description = models.CharField(max_length=1024, null=False, blank=False)
+    contact_email = models.EmailField(max_length=254)
+    contact_name = models.CharField(max_length=50, null=False, blank=False)
+    date_submitted = models.DateField(default=datetime.date.today)
+    booking_details = models.JSONField(encoder=None, decoder=None)
