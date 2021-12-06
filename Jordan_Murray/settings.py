@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'sass_processor',
     'home',
     'booking',
+    'profiles',
 
      # The following apps are required for allauth
     'django.contrib.sites',
