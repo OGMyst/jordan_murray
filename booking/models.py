@@ -8,18 +8,11 @@ class Enquiry(models.Model):
     """
     class Meta:
         verbose_name_plural = 'Enquiries'
-    
+
     BOOKING_TYPES =(
         ('TEACHING', 'Teaching'),
         ('PERFORMANCE', 'Performance'),
         ('EQUIPMENT', 'Equipment hire'),
-    )
-
-    BUDGET_RANGES=(
-        ('100-200', '100-200'),
-        ('200-300', '200-300'),
-        ('300-400', '300-400'),
-        ('400+', '400+'),
     )
 
     booking_type = models.CharField(max_length=32, null=False, blank=False, choices=BOOKING_TYPES)
