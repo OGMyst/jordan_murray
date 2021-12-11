@@ -22,6 +22,14 @@ INSTRUMENTS=(
     ('BODHRAN', 'Dulcimer'),
     ('OTHER', 'Other')
 )
+
+GENRE=(
+    ('WORLD', 'World'),
+    ('POP', 'Pop'),
+    ('CONTEMPORARY', 'Contemporary'),
+    ('ORCHESTRAL', 'Orchestral'),
+    ('OTHER', 'Other'),
+)
 class AdminContact(models.Model):
     """
     Details to be used for invoices
@@ -79,3 +87,12 @@ class TeachingDetails(models.Model):
     instrument = models.CharField(max_length=32, choices=INSTRUMENTS)
     lesson_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     description = models.CharField(max_length=254, blank=True)
+
+class Equipment(models.Model):
+    """
+    List of equipment available for hire
+    """
+    genre = models.CharField(max_length=32, choices=GENRE)
+    daily_hire_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    description = models.CharField(max_length=254)
+    equipment_type = models.CharField(max_length=32)
