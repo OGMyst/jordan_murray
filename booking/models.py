@@ -60,8 +60,11 @@ class PerformanceDetails(models.Model):
     booking_id = models.ForeignKey(Booking, on_delete=models.CASCADE)
     Address = models.ForeignKey(Address, on_delete=models.CASCADE, blank=True)
     performance_type = models.CharField(max_length=32, choices=PERFORMANCE_TYPES)
-    session_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0, blank=True)
+    session_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0,
+                                      blank=True, null=True)
     description = models.CharField(max_length=254, blank=True)
+    start = models.DateTimeField(blank=True, null=True)
+    finish = models.DateTimeField(blank=True, null=True)
 
 
 class EquipmentHireDetails(models.Model):
@@ -71,8 +74,8 @@ class EquipmentHireDetails(models.Model):
     """
     booking_id = models.ForeignKey(Booking, on_delete=models.CASCADE)
     Address = models.ForeignKey(Address, on_delete=models.CASCADE, blank=True)
-    pick_up_time = models.DateTimeField(blank=True)
-    return_time = models.DateTimeField(blank=True)
+    pick_up_time = models.DateTimeField(blank=True, null=True)
+    return_time = models.DateTimeField(blank=True, null=True)
     equipment_hired = models.JSONField(encoder=None, decoder=None)
     description = models.CharField(max_length=254, blank=True)
 
@@ -83,7 +86,7 @@ class TeachingDetails(models.Model):
     booking_id = models.ForeignKey(Booking, on_delete=models.CASCADE)
     Address = models.ForeignKey(Address, on_delete=models.CASCADE, blank=True)
     day = models.CharField(max_length=32, blank=True)
-    time = models.TimeField(blank=True)
+    time = models.TimeField(blank=True, null=True)
     instrument = models.CharField(max_length=32, choices=INSTRUMENTS)
     lesson_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     description = models.CharField(max_length=254, blank=True)
