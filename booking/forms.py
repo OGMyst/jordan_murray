@@ -4,7 +4,7 @@ BOOKING_TYPES =(
     ('TEACHING', 'Teaching'),
     ('PERFORMANCE', 'Performance'),
     ('EQUIPMENT', 'Equipment hire'),
-    ('TEACHING AND EQUIPMENT', 'Teaching and Equipment hire'),
+    ('PERFORMANCE AND EQUIPMENT', 'Performance and Equipment hire'),
 )
 
 DAY_OF_WEEK=(
@@ -37,7 +37,7 @@ class TeachingForm(forms.Form):
     Step two of form
     """
     address = forms.CharField()
-    day = forms.CharField(max_length=32, choices=DAY_OF_WEEK)
-    time = forms.TimeField(blank=True, null=True)
-    instrument = forms.CharField(max_length=32, choices=INSTRUMENTS)
-    description = forms.CharField(max_length=254, blank=True)
+    day = forms.ChoiceField(choices=DAY_OF_WEEK)
+    time = forms.TimeField(required=False)
+    instrument = forms.ChoiceField(choices=INSTRUMENTS)
+    description = forms.CharField(max_length=254, required=False)
