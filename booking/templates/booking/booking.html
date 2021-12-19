@@ -7,9 +7,9 @@
 {% endblock %}
 
 {% block content %}
-<form class="booking-form" action="" method="post">
+<form class="booking-form" action="{% url 'booking' %}" method="post">
     {% csrf_token %}
-    {{ booking_form|crispy }}
-    <input type="submit" value="Submit">
+    {{ form|crispy }}
+    <input type="submit" value="Submit" name="{{ step }}">
 </form>
 {% endblock %}
