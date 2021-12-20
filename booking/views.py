@@ -9,7 +9,7 @@ def booking(request):
 
     context = {
         "booking_form": booking_form,
-        "ßteaching_form": teaching_form,
+        "teaching_form": teaching_form,
     }
 
     template = "booking/booking.html"
