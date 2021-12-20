@@ -1,5 +1,33 @@
-.booking-form{
-    position:fixed;
+.booking-form {
+    position: fixed;
     top: 50%;
     left: 50%;
+}
+.control-group{
+    margin-bottom: 20px;
+
+    label{
+        margin-bottom: 8px;
+    }
+}
+.controls {
+    margin-top: 4px;
+    
+    input, select {
+        width: 300px;
+        border-radius: 5px;
+        background-color: #eae7e7;
+        border: 3px solid rgba(121, 121, 121, 0.61);
+        height: 25px;
+        padding: 5px 8px;
+    }
+
+    select {
+        height: 41px;
+        width: 322px
+    }
+}
+
+.control-label{
+    color: azure;
 }

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% load sass_tags %}
 {% load crispy_forms_tags %}
+{% load sass_tags %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% sass_src 'css/booking.scss' %}">
@@ -9,7 +9,8 @@
 {% block content %}
 <form class="booking-form" action="{% url 'booking' %}" method="post">
     {% csrf_token %}
-    {{ form|crispy }}
+    {{ booking_form|crispy }}
+    {{ teaching_form|crispy }}
     <input type="submit" value="Submit" name="{{ step }}">
 </form>
 {% endblock %}
