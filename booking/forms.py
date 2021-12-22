@@ -1,4 +1,6 @@
 from django import forms
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Div
 
 BOOKING_TYPES =(
     ('TEACHING', 'Teaching'),
@@ -55,6 +57,28 @@ class TeachingForm(forms.Form):
     time = forms.TimeField(required=False)
     instrument = forms.ChoiceField(choices=INSTRUMENTS)
     description = forms.CharField(max_length=254, required=False)
+
+    def __init__(self, *args, **kwargs):
+        """
+        Add classes to form
+        """
+        super().__init__(*args, **kwargs)
+
+        # for field in self.fields:
+        #     self.fields[field].widget.attrs['class'] = 'hidden'
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Div(
+                Div(
+                    'postcode',
+                    'day',
+                    'time',
+                    'instrument',
+                    'description',
+                    css_class = 'hidden'
+                )
+            )
+        )
 
 class PerformanceForm(forms.Form):
     """

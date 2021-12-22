@@ -69,6 +69,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'Jordan_Murray.urls'
 
 CRISPY_TEMPLATES_PACK = 'bootstrap4'
+CRISPY_FAIL_SILENTLY = not DEBUG
 
 TEMPLATES = [
     {
