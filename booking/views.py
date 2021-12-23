@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .forms import BookingForm, TeachingForm, EquipmentForm, PerformanceForm
+from .forms import BookingForm
+# , TeachingForm, EquipmentForm, PerformanceForm
 
 
 def booking(request):
@@ -22,9 +23,9 @@ def booking(request):
     # visible On clicking next users will be shown the next form based on the selected service
 
     booking_form = BookingForm()
-    teaching_form = TeachingForm()
-    performance_form = PerformanceForm()
-    equipment_form = EquipmentForm()
+    # teaching_form = TeachingForm()
+    # performance_form = PerformanceForm()
+    # equipment_form = EquipmentForm()
 
     # When users submit the form the information is extracted and placed into the correct fields
     # This is done manually since each submitted form can be different
@@ -33,11 +34,14 @@ def booking(request):
     # function isValidDate(value) {
     # var dateWrapper = new Date(value);
     # return !isNaN(dateWrapper.getDate());}
+    if request.method == 'POST':
+        print(request.POST)
+ 
     context = {
         "booking_form": booking_form,
-        "teaching_form": teaching_form,
-        "performance_form": performance_form,
-        "equipment_form": equipment_form,
+        # "teaching_form": teaching_form,
+        # "performance_form": performance_form,
+        # "equipment_form": equipment_form,
     }
 
     template = "booking/booking.html"

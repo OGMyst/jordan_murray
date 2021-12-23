@@ -8,8 +8,7 @@
 
 {% block content %}
 <form class="booking-form" action="{% url 'booking' %}" method="post">
-    {{ booking_form|crispy }}
-    {% crispy teaching_form %}
+    {% crispy booking_form %}
     <input type="submit" value="Submit" name="two">
 </form>
 {% endblock %}
