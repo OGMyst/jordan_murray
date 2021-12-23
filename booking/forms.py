@@ -1,6 +1,7 @@
 from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Div
+from crispy_forms.layout import Layout, Button, Div, Submit
+from crispy_forms.bootstrap import FormActions
 from django.contrib.postgres.forms import SimpleArrayField, SplitArrayField
 BOOKING_TYPES = (
     ("TEACHING", "Teaching"),
@@ -69,11 +70,41 @@ class BookingForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         """
-        Add classes to form
+        Wraps fields into their relevant forms in order to manage multiple form logic
         """
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
-        self.helper[0:3].wrap_together(Div, css_class="starting-form")
-        self.helper[1:6].wrap_together(Div, css_class="teaching-form")
-        self.helper[2:6].wrap_together(Div, css_class="performance-form")
-        self.helper[3:7].wrap_together(Div, css_class="equipment-form")
+        self.helper.layout = Layout(
+            Div(
+                'name',
+                'email',
+                'service',
+                Button('step-one','Next'),
+                css_class="starting-form"
+            ),
+            Div(
+                'postcode',
+                'day',
+                'time',
+                'instrument',
+                'teaching_description',
+                css_class="teaching-form"
+            ),
+            Div(
+                'date_and_time',
+                'performance_venue_postcode',
+                'budget',
+                'performance_description',
+                css_class="performance-form"
+            ),
+            Div(
+                'venue_postcode',
+                'hiring_dates',
+                'equipment_hired',
+                'equipment_description',
+                css_class="equipment-form"
+            ),
+            FormActions(
+                Submit('submit', 'submit')
+            )
+        )
