@@ -1,6 +1,6 @@
 from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Button, Div, Submit
+from crispy_forms.layout import Layout, Button, Div, Submit, HTML
 from crispy_forms.bootstrap import FormActions
 from django.contrib.postgres.forms import SimpleArrayField, SplitArrayField
 BOOKING_TYPES = (
@@ -79,7 +79,11 @@ class BookingForm(forms.Form):
                 'name',
                 'email',
                 'service',
-                Button('step-one','Next'),
+                Div(
+                    HTML(""" <p class='booking-steps-text'>Step 1 of 2 </p>"""),
+                    Button('step-one','Next'),
+                    css_class="booking-steps"
+                ),
                 css_class="starting-form"
             ),
             Div(
@@ -88,6 +92,11 @@ class BookingForm(forms.Form):
                 'time',
                 'instrument',
                 'teaching_description',
+                FormActions(
+                    HTML(""" <p class='booking-steps-text'>Step 2 of 2 </p>"""),
+                    Submit('submit', 'submit'),
+                    css_class="booking-submit"
+                ),
                 css_class="teaching-form"
             ),
             Div(
@@ -95,6 +104,11 @@ class BookingForm(forms.Form):
                 'performance_venue_postcode',
                 'budget',
                 'performance_description',
+                FormActions(
+                    HTML(""" <p class='booking-steps-text'>Step 2 of 2 </p>"""),
+                    Submit('submit', 'submit'),
+                    css_class="booking-submit"
+                ),
                 css_class="performance-form"
             ),
             Div(
@@ -102,9 +116,11 @@ class BookingForm(forms.Form):
                 'hiring_dates',
                 'equipment_hired',
                 'equipment_description',
+                FormActions(
+                    HTML(""" <p class='booking-steps-text'>Step 2 of 2 </p>"""),
+                    Submit('submit', 'submit'),
+                    css_class="booking-submit"
+                ),
                 css_class="equipment-form"
             ),
-            FormActions(
-                Submit('submit', 'submit')
-            )
         )

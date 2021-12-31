@@ -27,4 +27,11 @@
 .teaching-form, .performance-form, .equipment-form {
   display: none; }
 
+.starting-form {
+  width: fit-content; }
+
+.booking-steps {
+  display: flex;
+  justify-content: center; }
+
 /*# sourceMappingURL=booking.css.map */

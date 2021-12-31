@@ -35,3 +35,12 @@
 .teaching-form, .performance-form, .equipment-form{
     display: none;
 }
+
+.starting-form{
+    width: fit-content
+}
+
+.booking-submit, .booking-steps{
+    display: flex;
+    justify-content: center;
+}

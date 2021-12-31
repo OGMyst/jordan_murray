@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% load sass_tags %}
+{% load static %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% sass_src 'css/booking.scss' %}">
@@ -9,6 +10,10 @@
 {% block content %}
 <form class="booking-form" action="{% url 'booking' %}" method="post">
     {% crispy booking_form %}
-    <input type="submit" value="Submit" name="two">
 </form>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script src="{% static 'js/booking.js' %}"></script>
 {% endblock %}
