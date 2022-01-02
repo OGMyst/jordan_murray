@@ -3,6 +3,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Button, Div, Submit, HTML
 from crispy_forms.bootstrap import FormActions
 from django.contrib.postgres.forms import SimpleArrayField, SplitArrayField
+from .models import Booking
 BOOKING_TYPES = (
     ("TEACHING", "Teaching"),
     ("PERFORMANCE", "Performance"),
@@ -44,29 +45,35 @@ class BookingForm(forms.Form):
     Starting form will be the only visible form on page load.
     After user has selected a service the relevant form will be shown
     """
+    class Meta:
+        model = Booking
+
     # Starting form
     name = forms.CharField(label="Full name", max_length=50)
     email = forms.EmailField(max_length=254)
     service = forms.ChoiceField(choices=BOOKING_TYPES)
 
     # Teaching form
-    postcode = forms.CharField()
-    day = forms.ChoiceField(choices=DAY_OF_WEEK)
+    postcode = forms.CharField(required=False)
+    day = forms.ChoiceField(choices=DAY_OF_WEEK, required=False)
     time = forms.TimeField(required=False)
-    instrument = forms.ChoiceField(choices=INSTRUMENTS)
+    instrument = forms.ChoiceField(choices=INSTRUMENTS, required=False)
     teaching_description = forms.CharField(max_length=254, required=False)
 
     # Performance Form
-    date_and_time = forms.DateTimeField()
-    performance_venue_postcode = forms.CharField()
-    budget = forms.ChoiceField(choices=BUDGET_BANDS)
+    date_and_time = forms.DateTimeField(required=False)
+    performance_venue_postcode = forms.CharField(required=False)
+    budget = forms.ChoiceField(choices=BUDGET_BANDS, required=False)
     performance_description = forms.CharField(max_length=254, required=False)
 
     # Equipment Form
-    venue_postcode = forms.CharField()
-    hiring_dates = SplitArrayField(forms.DateField(), size=2)
-    equipment_hired = SimpleArrayField(forms.CharField())
-    equipment_description = forms.CharField(max_length=254, required=False)
+    venue_postcode = forms.CharField(required=False)
+    hiring_dates = SplitArrayField(forms.DateField(required=False), size=2, required=False)
+    equipment_hired = SimpleArrayField(forms.CharField(), required=False)
+    equipment_description = forms.CharField(
+        max_length=254,
+        required=False,
+    )
 
     def __init__(self, *args, **kwargs):
         """
@@ -75,52 +82,33 @@ class BookingForm(forms.Form):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         self.helper.layout = Layout(
+            Div("name", "email", "service", css_class="starting-form"),
             Div(
-                'name',
-                'email',
-                'service',
-                Div(
-                    HTML(""" <p class='booking-steps-text'>Step 1 of 2 </p>"""),
-                    Button('step-one','Next'),
-                    css_class="booking-steps"
-                ),
-                css_class="starting-form"
+                "postcode",
+                "day",
+                "time",
+                "instrument",
+                "teaching_description",
+                css_class="teaching-form",
             ),
             Div(
-                'postcode',
-                'day',
-                'time',
-                'instrument',
-                'teaching_description',
-                FormActions(
-                    HTML(""" <p class='booking-steps-text'>Step 2 of 2 </p>"""),
-                    Submit('submit', 'submit'),
-                    css_class="booking-submit"
-                ),
-                css_class="teaching-form"
+                "date_and_time",
+                "performance_venue_postcode",
+                "budget",
+                "performance_description",
+                css_class="performance-form",
             ),
             Div(
-                'date_and_time',
-                'performance_venue_postcode',
-                'budget',
-                'performance_description',
-                FormActions(
-                    HTML(""" <p class='booking-steps-text'>Step 2 of 2 </p>"""),
-                    Submit('submit', 'submit'),
-                    css_class="booking-submit"
-                ),
-                css_class="performance-form"
+                "venue_postcode",
+                "hiring_dates",
+                "equipment_hired",
+                "equipment_description",
+                css_class="equipment-form",
             ),
-            Div(
-                'venue_postcode',
-                'hiring_dates',
-                'equipment_hired',
-                'equipment_description',
-                FormActions(
-                    HTML(""" <p class='booking-steps-text'>Step 2 of 2 </p>"""),
-                    Submit('submit', 'submit'),
-                    css_class="booking-submit"
-                ),
-                css_class="equipment-form"
+            FormActions(
+                HTML(""" <p class='booking-steps-text'>Step 1 of 2 </p>"""),
+                Button("step-one", "Next"),
+                Submit("submit", "submit"),
+                css_class="booking-steps",
             ),
         )

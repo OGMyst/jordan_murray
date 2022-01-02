@@ -1,7 +1,10 @@
+import json
+import copy
 from django.shortcuts import render
+
+from booking.models import Booking
 from .forms import BookingForm
 
-import json
 
 
 def booking(request):
@@ -32,9 +35,47 @@ def booking(request):
     # function isValidDate(value) {
     # var dateWrapper = new Date(value);
     # return !isNaN(dateWrapper.getDate());}
+
+    # Get values for field which appear across all models. JSONify the rest
     if request.method == 'POST':
-        print(request.POST)
- 
+        submitted_form = copy.copy(request.POST)
+
+        #Removes empty values from unsused forms
+        cleaned_form = {k: v for k, v in submitted_form.items() if v}
+        cleaned_form.pop('submit')
+        booking_form = BookingForm(request.POST)
+
+        if booking_form.is_valid():
+            print('is valid')
+
+            #Remove fields not belonging to the booking details field
+            booking_type = cleaned_form['service']
+            contact_email = cleaned_form['email']
+            contact_name = cleaned_form['name']
+
+            cleaned_form.pop('service')
+            cleaned_form.pop('email')
+            cleaned_form.pop('name')
+            booking_details = json.dumps(cleaned_form)
+
+            # form_data={
+            #     'booking_type':  booking_type,
+            #     'contact_email':  contact_email,
+            #     'contact_name':  contact_name,
+            #     'booking_details':  booking_details,
+            # }
+            
+            booked = Booking(
+                booking_type = booking_type,
+                contact_email =  contact_email,
+                contact_name =  contact_name,
+                booking_details = booking_details,
+            )
+            booked.save()
+        else:
+            print (booking_form.errors)
+            print('not valid')
+
     context = {
         "booking_form": booking_form,
     }

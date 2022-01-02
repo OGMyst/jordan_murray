@@ -30,7 +30,7 @@
 .starting-form {
   width: fit-content; }
 
-.booking-steps {
+.booking-submit, .booking-steps {
   display: flex;
   justify-content: center; }
 

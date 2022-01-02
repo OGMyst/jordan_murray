@@ -1,4 +1,4 @@
-let selectedService = ''
+let selectedService = $('#id_service').val().toLowerCase()
 
 // Selected service determines which fields should be shown for the second step
 $('#id_service').change(function(){
