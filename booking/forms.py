@@ -1,6 +1,6 @@
 from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Button, Div, Submit, HTML
+from crispy_forms.layout import Layout, Button, Div, Submit, HTML, Field
 from crispy_forms.bootstrap import FormActions
 from django.contrib.postgres.forms import SimpleArrayField, SplitArrayField
 from .models import Booking
@@ -61,7 +61,7 @@ class BookingForm(forms.Form):
     teaching_description = forms.CharField(max_length=254, required=False)
 
     # Performance Form
-    date_and_time = forms.DateTimeField(required=False)
+    date_and_time = SplitArrayField(forms.DateTimeField(required=False), size=2, required=False)
     performance_venue_postcode = forms.CharField(required=False)
     budget = forms.ChoiceField(choices=BUDGET_BANDS, required=False)
     performance_description = forms.CharField(max_length=254, required=False)
@@ -86,13 +86,13 @@ class BookingForm(forms.Form):
             Div(
                 "postcode",
                 "day",
-                "time",
+                Field("time", css_class='teaching-picker'),
                 "instrument",
                 "teaching_description",
                 css_class="teaching-form",
             ),
             Div(
-                "date_and_time",
+                Field("date_and_time", css_class='performance-picker'),
                 "performance_venue_postcode",
                 "budget",
                 "performance_description",
@@ -100,7 +100,7 @@ class BookingForm(forms.Form):
             ),
             Div(
                 "venue_postcode",
-                "hiring_dates",
+                Field("hiring_dates", css_class='equipment-picker'),
                 "equipment_hired",
                 "equipment_description",
                 css_class="equipment-form",
