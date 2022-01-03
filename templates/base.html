@@ -15,7 +15,7 @@
 
   {% block corecss %}
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
-  <link rel="stylesheet" href="{% sass_src 'css/base.scss' %}">
+  <link rel="stylesheet" href="{% sass_src 'css/base.scss' %}"> 
   {% endblock %}
 
   {% block extra_css %}
@@ -24,7 +24,7 @@
   {% block corejs %}
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>  
   {% endblock %}
 
   {% block extra_js %}
@@ -78,5 +78,6 @@
     </div>
   </footer>
 </body>
-
+{% block postloadjs %}
+{% endblock %}
 </html>

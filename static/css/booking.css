@@ -11,11 +11,11 @@
 .controls {
   margin-top: 4px; }
   .controls input, .controls select {
-    width: 300px;
+    width: 322px;
     border-radius: 5px;
     background-color: #eae7e7;
     border: 3px solid rgba(121, 121, 121, 0.61);
-    height: 25px;
+    height: 41px;
     padding: 5px 8px; }
   .controls select {
     height: 41px;

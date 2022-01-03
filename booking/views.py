@@ -56,14 +56,9 @@ def booking(request):
             cleaned_form.pop('service')
             cleaned_form.pop('email')
             cleaned_form.pop('name')
-            booking_details = json.dumps(cleaned_form)
 
-            # form_data={
-            #     'booking_type':  booking_type,
-            #     'contact_email':  contact_email,
-            #     'contact_name':  contact_name,
-            #     'booking_details':  booking_details,
-            # }
+            # Service specifc fields are stored in a JSON field
+            booking_details = json.dumps(cleaned_form)
             
             booked = Booking(
                 booking_type = booking_type,
