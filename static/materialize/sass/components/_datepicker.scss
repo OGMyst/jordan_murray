@@ -1,13 +1,13 @@
 /* Modal */
 .datepicker-modal {
-  max-width: 325px;
-  min-width: 300px;
+  // max-width: 325px;
+  // min-width: 300px;
   max-height: none;
 }
 
 .datepicker-container.modal-content {
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   padding: 0;
 }
 
@@ -79,7 +79,8 @@
 
 /* Calendar */
 .datepicker-calendar-container {
-  flex: 2.5 auto;
+  // flex: 2.5 auto;
+  padding: 20px 22px;
 }
 
 .datepicker-table {

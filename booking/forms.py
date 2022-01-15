@@ -61,7 +61,9 @@ class BookingForm(forms.Form):
     teaching_description = forms.CharField(max_length=254, required=False)
 
     # Performance Form
-    date_and_time = SplitArrayField(forms.DateTimeField(required=False), size=2, required=False)
+    date = forms.DateField(required=False)
+    start_time = forms.TimeField(required=False)
+    finish_time = forms.TimeField(required=False)
     performance_venue_postcode = forms.CharField(required=False)
     budget = forms.ChoiceField(choices=BUDGET_BANDS, required=False)
     performance_description = forms.CharField(max_length=254, required=False)
@@ -92,7 +94,9 @@ class BookingForm(forms.Form):
                 css_class="teaching-form",
             ),
             Div(
-                Field("date_and_time", css_class='performance-picker'),
+                Field("date", css_class='date-picker'),
+                Field("start_time", css_class='time-picker'),
+                Field("finish_time", css_class='time-picker'),
                 "performance_venue_postcode",
                 "budget",
                 "performance_description",

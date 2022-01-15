@@ -10,7 +10,8 @@
 
 .controls {
   margin-top: 4px; }
-  .controls input, .controls select {
+  .controls input,
+  .controls select {
     width: 322px;
     border-radius: 5px;
     background-color: #eae7e7;
@@ -24,14 +25,20 @@
 .control-label {
   color: azure; }
 
-.teaching-form, .performance-form, .equipment-form {
+.teaching-form,
+.performance-form,
+.equipment-form {
   display: none; }
 
 .starting-form {
   width: fit-content; }
 
-.booking-submit, .booking-steps {
+.booking-submit,
+.booking-steps {
   display: flex;
   justify-content: center; }
+
+.open {
+  top: calc((80vh - 391px) / 2) !important; }
 
 /*# sourceMappingURL=booking.css.map */

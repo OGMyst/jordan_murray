@@ -6,6 +6,7 @@ let formType = {
     'equipment': 'equipment-picker',
 
 }
+
 // Selected service determines which fields should be shown for the second step
 $('#id_service').change(function(){
     selectedService = $('#id_service').val().toLowerCase()
@@ -21,5 +22,24 @@ $('#button-id-step-one').click(function(){
 })
 
 function materializeDatetimePicker(){
-    $(`.${formType[selectedService]}`).datepicker();
+    switch (selectedService){
+        case 'teaching':
+            $(`.${formType[selectedService]}`).timepicker();
+            break;
+        case 'performance':
+            $('.time-picker').timepicker();
+            $('.date-picker').datepicker();          
+            makeTimeValid();
+            break;
+        case 'equipment':
+            $(`.${formType[selectedService]}`).datepicker();
+        }
+}
+
+function makeTimeValid(){
+    $('#submit-id-submit').click(function(event){
+        $('.time-picker').each(function(){
+            this.value = this.value.replace(/(am|pm)/i, '').trim()            
+        })
+    });
 }

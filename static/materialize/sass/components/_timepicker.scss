@@ -5,9 +5,11 @@
 }
 
 .timepicker-container.modal-content {
-  display: flex;
-  flex-direction: column;
+//   display: flex;
+//   flex-direction: column;
   padding: 0;
+  width: 364px;
+  height: 561.8px;
 }
 
 .text-primary {
@@ -17,7 +19,7 @@
 
 /* Clock Digital Display */
 .timepicker-digital-display {
-  flex: 1 auto;
+//   flex: 1 auto;
   background-color: $secondary-color;
   padding: 10px;
   font-weight: 300;

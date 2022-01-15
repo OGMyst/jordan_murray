@@ -3,17 +3,18 @@
     top: calc((100vh - 300px) / 2);
     left: calc((100vw - 350px) / 2);
 }
-.control-group{
+.control-group {
     margin-bottom: 20px;
 
-    label{
+    label {
         margin-bottom: 8px;
     }
 }
 .controls {
     margin-top: 4px;
 
-    input, select {
+    input,
+    select {
         width: 322px;
         border-radius: 5px;
         background-color: #eae7e7;
@@ -24,23 +25,30 @@
 
     select {
         height: 41px;
-        width: 322px
+        width: 322px;
     }
 }
 
-.control-label{
+.control-label {
     color: azure;
 }
 
-.teaching-form, .performance-form, .equipment-form{
+.teaching-form,
+.performance-form,
+.equipment-form {
     display: none;
 }
 
-.starting-form{
-    width: fit-content
+.starting-form {
+    width: fit-content;
 }
 
-.booking-submit, .booking-steps{
+.booking-submit,
+.booking-steps {
     display: flex;
     justify-content: center;
+}
+
+.open {
+    top: calc((80vh - 391px) / 2) !important;
 }
