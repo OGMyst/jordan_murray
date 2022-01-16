@@ -110,8 +110,9 @@ class BookingForm(forms.Form):
                 css_class="equipment-form",
             ),
             FormActions(
+                Button("back", "Back", css_class='secondary-btn'),
                 HTML(""" <p class='booking-steps-text'>Step 1 of 2 </p>"""),
-                Button("step-one", "Next"),
+                Button("next", "Next"),
                 Submit("submit", "submit"),
                 css_class="booking-steps",
             ),

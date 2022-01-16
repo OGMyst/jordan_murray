@@ -2297,12 +2297,11 @@ input[type=range] + .thumb {
 .btn, .btn-small, .btn-large,
 .btn-flat {
   border: none;
-  border-radius: 2px;
+  border-radius: 5px;
   display: inline-block;
   height: 36px;
-  line-height: 36px;
+  line-height: 32px;
   padding: 0 16px;
-  text-transform: uppercase;
   vertical-align: middle;
   -webkit-tap-highlight-color: transparent; }
 
@@ -2361,18 +2360,18 @@ input[type=range] + .thumb {
 
 .btn:focus, .btn-small:focus, .btn-large:focus,
 .btn-floating:focus {
-  background-color: #1d7d74; }
+  background-color: black; }
 
 .btn, .btn-small, .btn-large {
   text-decoration: none;
-  color: #fff;
-  background-color: #26a69a;
+  color: #3ffff3;
+  background-color: #000000;
   text-align: center;
   letter-spacing: .5px;
   transition: background-color .2s ease-out;
   cursor: pointer; }
   .btn:hover, .btn-small:hover, .btn-large:hover {
-    background-color: #2bbbad; }
+    background-color: #0d0d0d; }
 
 .btn-floating {
   display: inline-block;
@@ -2384,13 +2383,13 @@ input[type=range] + .thumb {
   height: 40px;
   line-height: 40px;
   padding: 0;
-  background-color: #26a69a;
+  background-color: #000000;
   border-radius: 50%;
   transition: background-color .3s;
   cursor: pointer;
   vertical-align: middle; }
   .btn-floating:hover {
-    background-color: #26a69a; }
+    background-color: #000000; }
   .btn-floating:before {
     border-radius: 0; }
   .btn-floating.btn-large {
@@ -2515,7 +2514,7 @@ button.btn-floating {
     z-index: -1;
     width: 40px;
     height: 40px;
-    background-color: #26a69a;
+    background-color: #000000;
     border-radius: 50%;
     transform: scale(0); }
 
@@ -2552,6 +2551,11 @@ button.btn-floating {
 .btn-block {
   display: block; }
 
+.secondary-btn {
+  background: transparent;
+  border: 2px solid black;
+  box-shadow: none; }
+
 .dropdown-content {
   background-color: #fff;
   margin: 0;
@@ -2583,7 +2587,7 @@ button.btn-floating {
       height: 1px; }
     .dropdown-content li > a, .dropdown-content li > span {
       font-size: 16px;
-      color: #26a69a;
+      color: #000000;
       display: block;
       line-height: 22px;
       padding: 14px 16px; }
@@ -2678,11 +2682,11 @@ body.keyboard-focused .dropdown-content li:focus {
   will-change: bottom, opacity; }
 
 select:focus {
-  outline: 1px solid #c9f3ef; }
+  outline: 1px solid #787878; }
 
 button:focus {
   outline: none;
-  background-color: #2ab7a9; }
+  background-color: #0a0a0a; }
 
 label {
   font-size: 0.8rem;
@@ -2778,8 +2782,8 @@ textarea.materialize-textarea {
   input[type=number]:not(.browser-default):focus:not([readonly]),
   input[type=search]:not(.browser-default):focus:not([readonly]),
   textarea.materialize-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid #26a69a;
-    box-shadow: 0 1px 0 0 #26a69a; }
+    border-bottom: 1px solid #000000;
+    box-shadow: 0 1px 0 0 #000000; }
   input:not([type]):focus:not([readonly]) + label,
   input[type=text]:not(.browser-default):focus:not([readonly]) + label,
   input[type=password]:not(.browser-default):focus:not([readonly]) + label,
@@ -2793,7 +2797,7 @@ textarea.materialize-textarea {
   input[type=number]:not(.browser-default):focus:not([readonly]) + label,
   input[type=search]:not(.browser-default):focus:not([readonly]) + label,
   textarea.materialize-textarea:focus:not([readonly]) + label {
-    color: #26a69a; }
+    color: #000000; }
   input:not([type]):focus.valid ~ label,
   input[type=text]:not(.browser-default):focus.valid ~ label,
   input[type=password]:not(.browser-default):focus.valid ~ label,
@@ -3053,7 +3057,7 @@ textarea.materialize-textarea + label:after {
     transition: color .2s;
     top: 0.5rem; }
     .input-field .prefix.active {
-      color: #26a69a; }
+      color: #000000; }
   .input-field .prefix ~ input,
   .input-field .prefix ~ textarea,
   .input-field .prefix ~ label,
@@ -3198,11 +3202,11 @@ textarea {
 [type="radio"]:checked + span:after,
 [type="radio"].with-gap:checked + span:before,
 [type="radio"].with-gap:checked + span:after {
-  border: 2px solid #26a69a; }
+  border: 2px solid #000000; }
 
 [type="radio"]:checked + span:after,
 [type="radio"].with-gap:checked + span:after {
-  background-color: #26a69a; }
+  background-color: #000000; }
 
 [type="radio"]:checked + span:after {
   transform: scale(1.02); }
@@ -3291,8 +3295,8 @@ textarea {
   height: 22px;
   border-top: 2px solid transparent;
   border-left: 2px solid transparent;
-  border-right: 2px solid #26a69a;
-  border-bottom: 2px solid #26a69a;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
   transform: rotate(40deg);
   backface-visibility: hidden;
   transform-origin: 100% 100%; }
@@ -3309,7 +3313,7 @@ textarea {
   height: 22px;
   border-top: none;
   border-left: none;
-  border-right: 2px solid #26a69a;
+  border-right: 2px solid #000000;
   border-bottom: none;
   transform: rotate(90deg);
   backface-visibility: hidden;
@@ -3364,8 +3368,8 @@ textarea {
   top: 0;
   width: 20px;
   height: 20px;
-  border: 2px solid #26a69a;
-  background-color: #26a69a;
+  border: 2px solid #000000;
+  background-color: #000000;
   z-index: 0; }
 
 [type="checkbox"].filled-in.tabbed:focus + span:not(.lever):after {
@@ -3375,8 +3379,8 @@ textarea {
 
 [type="checkbox"].filled-in.tabbed:checked:focus + span:not(.lever):after {
   border-radius: 2px;
-  background-color: #26a69a;
-  border-color: #26a69a; }
+  background-color: #000000;
+  border-color: #000000; }
 
 [type="checkbox"].filled-in:disabled:not(:checked) + span:not(.lever):before {
   background-color: transparent;
@@ -3408,11 +3412,11 @@ textarea {
   width: 0;
   height: 0; }
   .switch label input[type=checkbox]:checked + .lever {
-    background-color: #84c7c1; }
+    background-color: #404040; }
     .switch label input[type=checkbox]:checked + .lever:before, .switch label input[type=checkbox]:checked + .lever:after {
       left: 18px; }
     .switch label input[type=checkbox]:checked + .lever:after {
-      background-color: #26a69a; }
+      background-color: #000000; }
 
 .switch label .lever {
   content: "";
@@ -3437,7 +3441,7 @@ textarea {
     top: -3px;
     transition: left 0.3s ease, background .3s ease, box-shadow 0.1s ease, transform .1s ease; }
   .switch label .lever:before {
-    background-color: rgba(38, 166, 154, 0.15); }
+    background-color: rgba(0, 0, 0, 0.15); }
   .switch label .lever:after {
     background-color: #F1F1F1;
     box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12); }
@@ -3445,7 +3449,7 @@ textarea {
 input[type=checkbox]:checked:not(:disabled) ~ .lever:active::before,
 input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
   transform: scale(2.4);
-  background-color: rgba(38, 166, 154, 0.15); }
+  background-color: rgba(0, 0, 0, 0.15); }
 
 input[type=checkbox]:not(:disabled) ~ .lever:active:before,
 input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::before {
@@ -3501,7 +3505,7 @@ select {
     user-select: none;
     z-index: 1; }
     .select-wrapper input.select-dropdown:focus {
-      border-bottom: 1px solid #26a69a; }
+      border-bottom: 1px solid #000000; }
   .select-wrapper .caret {
     position: absolute;
     right: 0;
@@ -3629,7 +3633,7 @@ input[type=range] + .thumb {
   height: 0;
   width: 0;
   border-radius: 50%;
-  background-color: #26a69a;
+  background-color: #000000;
   margin-left: 7px;
   transform-origin: 50% 50%;
   transform: rotate(-45deg); }
@@ -3637,7 +3641,7 @@ input[type=range] + .thumb {
     display: block;
     width: 30px;
     text-align: center;
-    color: #26a69a;
+    color: #000000;
     font-size: 0;
     transform: rotate(45deg); }
   input[type=range] + .thumb.active {
@@ -3661,15 +3665,15 @@ input[type=range]::-webkit-slider-thumb {
   height: 14px;
   width: 14px;
   border-radius: 50%;
-  background: #26a69a;
+  background: #000000;
   transition: box-shadow .3s;
   -webkit-appearance: none;
-  background-color: #26a69a;
+  background-color: #000000;
   transform-origin: 50% 50%;
   margin: -5px 0 0 0; }
 
 .keyboard-focused input[type=range]:focus:not(.active)::-webkit-slider-thumb {
-  box-shadow: 0 0 0 10px rgba(38, 166, 154, 0.26); }
+  box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.26); }
 
 input[type=range] {
   /* fix for FF unable to apply focus style bug  */
@@ -3689,7 +3693,7 @@ input[type=range]::-moz-range-thumb {
   height: 14px;
   width: 14px;
   border-radius: 50%;
-  background: #26a69a;
+  background: #000000;
   transition: box-shadow .3s;
   margin-top: -5px; }
 
@@ -3698,7 +3702,7 @@ input[type=range]:-moz-focusring {
   outline-offset: -1px; }
 
 .keyboard-focused input[type=range]:focus:not(.active)::-moz-range-thumb {
-  box-shadow: 0 0 0 10px rgba(38, 166, 154, 0.26); }
+  box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.26); }
 
 input[type=range]::-ms-track {
   height: 3px;
@@ -3719,11 +3723,11 @@ input[type=range]::-ms-thumb {
   height: 14px;
   width: 14px;
   border-radius: 50%;
-  background: #26a69a;
+  background: #000000;
   transition: box-shadow .3s; }
 
 .keyboard-focused input[type=range]:focus:not(.active)::-ms-thumb {
-  box-shadow: 0 0 0 10px rgba(38, 166, 154, 0.26); }
+  box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.26); }
 
 /* Modal */
 .datepicker-modal {
@@ -3761,7 +3765,7 @@ input[type=range]::-ms-thumb {
 /* Date Display */
 .datepicker-date-display {
   flex: 1 auto;
-  background-color: #26a69a;
+  background-color: #000000;
   color: #fff;
   padding: 20px 22px;
   font-weight: 500; }
@@ -3798,9 +3802,9 @@ input[type=range]::-ms-thumb {
     border-radius: 50%;
     padding: 0; }
     .datepicker-table td.is-today {
-      color: #26a69a; }
+      color: #000000; }
     .datepicker-table td.is-selected {
-      background-color: #26a69a;
+      background-color: #000000;
       color: #fff; }
     .datepicker-table td.is-outside-current-month, .datepicker-table td.is-disabled {
       color: rgba(0, 0, 0, 0.3);
@@ -3817,7 +3821,7 @@ input[type=range]::-ms-thumb {
   cursor: pointer;
   color: inherit; }
   .datepicker-day-button:focus {
-    background-color: rgba(43, 161, 150, 0.25); }
+    background-color: rgba(0, 0, 0, 0.25); }
 
 /* Footer */
 .datepicker-footer {
@@ -3831,7 +3835,7 @@ input[type=range]::-ms-thumb {
 .datepicker-clear,
 .datepicker-today,
 .datepicker-done {
-  color: #26a69a;
+  color: #000000;
   padding: 0 1rem; }
 
 .datepicker-clear {
@@ -3867,7 +3871,7 @@ input[type=range]::-ms-thumb {
 
 /* Clock Digital Display */
 .timepicker-digital-display {
-  background-color: #26a69a;
+  background-color: #000000;
   padding: 10px;
   font-weight: 300; }
 
@@ -3938,7 +3942,7 @@ input[type=range]::-ms-thumb {
 
 .timepicker-tick.active,
 .timepicker-tick:hover {
-  background-color: rgba(38, 166, 154, 0.25); }
+  background-color: rgba(0, 0, 0, 0.25); }
 
 .timepicker-dial {
   transition: transform 350ms, opacity 350ms; }
@@ -3953,7 +3957,7 @@ input[type=range]::-ms-thumb {
 .timepicker-canvas {
   transition: opacity 175ms; }
   .timepicker-canvas line {
-    stroke: #26a69a;
+    stroke: #000000;
     stroke-width: 4;
     stroke-linecap: round; }
 
@@ -3962,11 +3966,11 @@ input[type=range]::-ms-thumb {
 
 .timepicker-canvas-bearing {
   stroke: none;
-  fill: #26a69a; }
+  fill: #000000; }
 
 .timepicker-canvas-bg {
   stroke: none;
-  fill: #26a69a; }
+  fill: #000000; }
 
 /* Footer */
 .timepicker-footer {
@@ -3979,7 +3983,7 @@ input[type=range]::-ms-thumb {
   color: #F44336; }
 
 .timepicker-close {
-  color: #26a69a; }
+  color: #000000; }
 
 .timepicker-clear,
 .timepicker-close {

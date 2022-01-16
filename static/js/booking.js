@@ -14,10 +14,19 @@ $('#id_service').change(function(){
 })
 
 // Using selected service, when the user selects the next button the second step of the form is shown
-$('#button-id-step-one').click(function(){
+$('#button-id-next').click(function(){
     $('.starting-form').hide()
     $(`.${selectedService}-form`).show() // Second step of the form
-    
+    $('#button-id-next').hide()
+    $('#submit-id-submit').show()
+    materializeDatetimePicker() //Forms have different date/time/datetime input requirements
+})
+
+$('#button-id-back').click(function(){
+    $('.starting-form').show()
+    $(`.${selectedService}-form`).hide() // Second step of the form
+    $('#button-id-next').show()
+    $('#submit-id-submit').hide()
     materializeDatetimePicker() //Forms have different date/time/datetime input requirements
 })
 

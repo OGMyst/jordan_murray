@@ -36,9 +36,15 @@
 .booking-submit,
 .booking-steps {
   display: flex;
-  justify-content: center; }
+  justify-content: space-between; }
 
 .open {
   top: calc((80vh - 391px) / 2) !important; }
+
+#submit-id-submit {
+  display: none; }
+
+.booking-steps-text {
+  line-height: 2.3; }
 
 /*# sourceMappingURL=booking.css.map */
