@@ -53,10 +53,31 @@
     top: calc((80vh - 391px) / 2) !important;
 }
 
-#submit-id-submit{
+#submit-id-submit {
     display: none;
 }
 
 .booking-steps-text {
     line-height: 2.3;
+}
+.heading {
+    height: calc(100vh / 3 - 31px);
+    text-align: center;
+    h1{
+        padding-top:300px;
+    }
+}
+
+.thank-you-container{
+    height: calc((100vh/3)*2);
+    text-align: center;
+    p{
+        max-width: 50%;
+        margin: auto;
+        margin-bottom: 90px;
+    }
+
+    a{
+        color: #3ffff3;
+    }
 }

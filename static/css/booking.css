@@ -47,4 +47,17 @@
 .booking-steps-text {
   line-height: 2.3; }
 
+.heading {
+  height: calc(100vh / 3 - 31px);
+  text-align: center; }
+  .heading h1 {
+    padding-top: 300px; }
+
+.thank-you-container {
+  height: calc((100vh/3)*2);
+  text-align: center; }
+  .thank-you-container p {
+    max-width: 50%;
+    margin: auto; }
+
 /*# sourceMappingURL=booking.css.map */

@@ -67,6 +67,9 @@ def booking(request):
                 booking_details = booking_details,
             )
             booked.save()
+            template = "booking/thank you.html"
+            return render(request, template)
+            
         else:
             print (booking_form.errors)
             print('not valid')
