@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'home',
     'booking',
     'profiles',
+    'music',
 
      # The following apps are required for allauth
     'django.contrib.sites',
