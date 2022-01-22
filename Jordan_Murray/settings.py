@@ -99,7 +99,7 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-SITE_ID = 1
+SITE_ID = 2
 
 WSGI_APPLICATION = 'Jordan_Murray.wsgi.application'
 
@@ -123,7 +123,7 @@ DATABASES = {
     }
 }
 
-
+LOGIN_REDIRECT_URL = '/'
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
