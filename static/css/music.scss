@@ -4,6 +4,7 @@
     text-align: center;
     h1 {
         padding-top: 50px;
+        font-size: 60px;
     }
 }
 
@@ -24,9 +25,34 @@
     }
 }
 
+.genre-content {
+    background: #242424;
+}
+
+.genre-container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px 0;
+
+    h1{
+        font-size: 40px;
+        padding-bottom: 24px;
+    }
+
+    p{
+        line-height: 1.8;
+        font-weight: 300;
+        padding-bottom: 24px;
+    }
+}
+
 .genre-image {
+    display: flex;
+    justify-content: space-between;
+
     img {
-        width: 100px;
-        height: 150px;
+        width: 200px;
+        height: 300px;
+        border-radius: 5px;
     }
 }

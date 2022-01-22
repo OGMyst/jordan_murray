@@ -3,7 +3,8 @@
   padding-top: 40px;
   text-align: center; }
   .heading h1 {
-    padding-top: 50px; }
+    padding-top: 50px;
+    font-size: 60px; }
 
 .secondary-nav {
   padding: 10px 80px;
@@ -19,8 +20,27 @@
   .secondary-nav li {
     padding: 0 45px; }
 
-.genre-image img {
-  width: 100px;
-  height: auto; }
+.genre-content {
+  background: #242424; }
+
+.genre-container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 0; }
+  .genre-container h1 {
+    font-size: 40px;
+    padding-bottom: 24px; }
+  .genre-container p {
+    line-height: 1.8;
+    font-weight: 300;
+    padding-bottom: 24px; }
+
+.genre-image {
+  display: flex;
+  justify-content: space-between; }
+  .genre-image img {
+    width: 200px;
+    height: 300px;
+    border-radius: 5px; }
 
 /*# sourceMappingURL=music.css.map */

@@ -58,6 +58,9 @@
   text-align: center; }
   .thank-you-container p {
     max-width: 50%;
-    margin: auto; }
+    margin: auto;
+    margin-bottom: 90px; }
+  .thank-you-container a {
+    color: #3ffff3; }
 
 /*# sourceMappingURL=booking.css.map */

@@ -4,7 +4,7 @@ from .models import GenreInfo
 def music(request):
     """ A view to return the music page """
 
-    genres = GenreInfo.objects.all()
+    genres = GenreInfo.objects.all().order_by('title')
     context ={
         'genres': genres
     }

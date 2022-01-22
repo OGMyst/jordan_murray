@@ -12,12 +12,14 @@
 </div>
 <div class="secondary-nav">
     <ul>
-        <Li>World</Li>
-        <Li>Pop</Li>
+        {% for genre in genres %}
+            <Li>{{ genre.title }}</Li>
+        {% endfor %}
+        <!-- <Li>Pop</Li>
         <Li>Contemporary</Li>
         <Li>Folk</Li>
         <Li>Theatre</Li>
-        <Li>Dulcimer</Li>
+        <Li>Dulcimer</Li> -->
     </ul>
 </div>
 <section>
