@@ -1,4 +1,7 @@
 {% extends "account/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
 {% load i18n %}
 {% load account socialaccount %}
 
@@ -8,7 +11,7 @@
 
 {% block inner_content %}
 
-    <h1 class="text-center" >{% trans "Sign In" %}</h1>
+    <h1 class="page-header">{% trans "Sign In" %}</h1>
     <form class="login" method="POST" action="{% url 'account_login' %}">
         {% csrf_token %}
         
@@ -17,8 +20,8 @@
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
-        <a class="button" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-        <div class="d-flex mt-5">
+        <a class="button forgot-password" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+        <div class="login-CTAs">
             <div class="create-account-link">
                 <a href="{{ signup_url }}">Create Account</a>
             </div>
@@ -28,4 +31,8 @@
         </div>
     </form>
 
+{% endblock %}
+
+{% block postloadjs %}
+    <script src="{% static 'js/login.js' %}"></script>    
 {% endblock %}

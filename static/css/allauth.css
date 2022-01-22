@@ -1,0 +1,28 @@
+.allauth-container {
+  max-width: 1000px;
+  padding-bottom: 10vh; }
+
+.main-content {
+  align-items: center; }
+  .main-content h1 {
+    text-align: center;
+    padding-bottom: 50px; }
+
+.controls input {
+  width: 400px;
+  height: 30px; }
+
+.controls label {
+  color: azure; }
+
+input.checkboxinput {
+  width: auto;
+  height: auto; }
+
+.forgot-password {
+  position: relative;
+  float: right;
+  color: azure;
+  font-size: 14px; }
+
+/*# sourceMappingURL=allauth.css.map */

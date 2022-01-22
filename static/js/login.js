@@ -1,0 +1,1 @@
+$('.forgot-password').insertAfter($('#div_id_password .control-label'))

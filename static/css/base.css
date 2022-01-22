@@ -89,4 +89,37 @@ footer {
   footer p {
     font-size: 12px; }
 
+.main-content {
+  padding-top: 52px;
+  min-height: calc(100vh - 85px);
+  display: flex;
+  justify-content: center; }
+
+.page-header {
+  font-size: 60px; }
+
+/* --------------  FORM CONTROLS -------------------*/
+.control-group {
+  margin-bottom: 20px; }
+  .control-group label {
+    margin-bottom: 8px;
+    font-size: 14px; }
+
+.controls {
+  margin-top: 4px; }
+  .controls input,
+  .controls select {
+    width: 322px;
+    border-radius: 5px;
+    background-color: #eae7e7;
+    border: 3px solid rgba(121, 121, 121, 0.61);
+    height: 41px;
+    padding: 5px 8px; }
+  .controls select {
+    height: 41px;
+    width: 322px; }
+
+.control-label {
+  color: azure; }
+
 /*# sourceMappingURL=base.css.map */

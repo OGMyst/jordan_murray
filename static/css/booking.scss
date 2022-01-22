@@ -3,35 +3,6 @@
     top: calc((100vh - 300px) / 2);
     left: calc((100vw - 350px) / 2);
 }
-.control-group {
-    margin-bottom: 20px;
-
-    label {
-        margin-bottom: 8px;
-    }
-}
-.controls {
-    margin-top: 4px;
-
-    input,
-    select {
-        width: 322px;
-        border-radius: 5px;
-        background-color: #eae7e7;
-        border: 3px solid rgba(121, 121, 121, 0.61);
-        height: 41px;
-        padding: 5px 8px;
-    }
-
-    select {
-        height: 41px;
-        width: 322px;
-    }
-}
-
-.control-label {
-    color: azure;
-}
 
 .teaching-form,
 .performance-form,
