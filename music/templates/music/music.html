@@ -7,24 +7,21 @@
 {% endblock %}
 
 {% block content %}
-<div class="heading">
-    <h1 class="heading-text">Music</h1>
-</div>
-<div class="secondary-nav">
-    <ul>
-        {% for genre in genres %}
+<!-- Div present to avoid flex from base.html template -->
+<div>
+    <div class="heading">
+        <h1 class="heading-text">Music</h1>
+    </div>
+    <div class="secondary-nav">
+        <ul>
+            {% for genre in genres %}
             <Li>{{ genre.title }}</Li>
-        {% endfor %}
-        <!-- <Li>Pop</Li>
-        <Li>Contemporary</Li>
-        <Li>Folk</Li>
-        <Li>Theatre</Li>
-        <Li>Dulcimer</Li> -->
-    </ul>
-</div>
-<section>
-    <div class="genre-content">
-        {% for genre in genres %}
+            {% endfor %}
+        </ul>
+    </div>
+    <section>
+        <div class="container">
+            {% for genre in genres %}
             <div class="genre-container">
                 <h1>{{ genre.title }}</h1>
                 <p>{{ genre.summary }}</p>
@@ -34,13 +31,11 @@
                     <img src="/media/{{ genre.image_three }}">
                 </div>
             </div>
-        {% endfor %}
-    </div>
-</section>
+            {% endfor %}
+        </div>
+    </section>
+</div>
 {% endblock %}
 
-{% block postloadjs %}
-    <!-- {{ block.super }}
-    <script src="{% static 'materialize/js/bin/materialize.min.js' %}"></script>
-    <script src="{% static 'js/booking.js' %}"></script> -->
+{% block postloadjs %}ß
 {% endblock %}

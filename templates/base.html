@@ -71,7 +71,7 @@
   <div class="background-overlay"></div>
   {% block page_header %}
   {% endblock %}
-
+  <!-- This is a flexbox, if you don't want page content to flex then wrap the code in a div -->
   <div class="main-content">
   {% block content %}
   {% endblock %}
@@ -85,5 +85,6 @@
 </body>
 {% block postloadjs %}
 <script src="{% static 'materialize/js/bin/materialize.min.js' %}"></script>
+<script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script>
 {% endblock %}
 </html>

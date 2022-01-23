@@ -2,30 +2,32 @@
 {% load sass_tags %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% sass_src 'css/home.scss' %}">
+<link rel="stylesheet" href="{% sass_src 'css/profile.scss' %}">
 {% endblock %}
 
 {% block content %}
-<div class="lead-container">
-    <div class="lead-content">
-        <h1>Jordan Murray Percussion</h1>
-        <p>Book me for Perfomance, Teaching or Equipment hire today</p>
-        <div class="button-container">
-            <a class="primary-button" href="#">Start Booking</a>
-        </div>
+<!-- Div present to avoid flex from base.html template -->
+<div>
+    <div class="heading">
+        <h1 class="heading-text">Profile</h1>
     </div>
+    <div class="secondary-nav">
+        <ul>
+            <Li><span class="iconify-inline" data-icon="bx:bx-book-alt"></span>Teaching</Li>
+            <Li><span class="iconify-inline" data-icon="ic:outline-settings"></span>Account</Li>
+            <Li><span class="iconify-inline" data-icon="clarity:license-line"></span>Equipment hire</Li>
+            <Li><span class="iconify-inline" data-icon="fluent:wallet-20-regular"></span>Invoices</Li>
+            <Li><span class="iconify-inline" data-icon="ph:music-notes"></span>Performance</Li>
+        </ul>
+    </div>
+    <section>
+        <div class="container">
+            <div class="content">
+                <div class="overview"></div>
+                <div class="calendar"></div> 
+            </div>
+        </div>
+    </section>
 </div>
-<div class="container biography">
-    <h1>Biography</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. Odio facilisis mauris sit amet massa vitae.
-        Neque viverra justo nec ultrices. Ultrices vitae auctor eu augue ut lectus. Nulla posuere sollicitudin aliquam
-        ultrices sagittis orci a scelerisque. Tempus quam pellentesque nec nam aliquam sem et tortor. Ligula ullamcorper
-        malesuada proin libero nunc consequat interdum. Rhoncus aenean vel elit scelerisque mauris pellentesque
-        pulvinar. Blandit cursus risus at ultrices mi tempus imperdiet nulla malesuada. Dolor morbi non arcu risus.
-        Neque sodales ut etiam sit amet nisl purus. Cursus vitae congue mauris rhoncus. Arcu dictum varius duis at
-        consectetur lorem donec. Semper feugiat nibh sed pulvinar proin gravida hendrerit lectus a. Etiam non quam lacus
-        suspendisse faucibus. Et malesuada fames ac turpis egestas maecenas pharetra convallis posuere. Proin libero
-        nunc consequat interdum varius sit amet.</p>
-</div>
+
 {% endblock %}
