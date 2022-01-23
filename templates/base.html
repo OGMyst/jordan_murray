@@ -1,4 +1,6 @@
 {% load sass_tags %}
+{% load static %}
+
 <!doctype html>
 <html lang="en">
 
@@ -15,6 +17,7 @@
 
   {% block corecss %}
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
+  <link rel="stylesheet" href="{% sass_src 'materialize/sass/materialize.scss' %}">
   <link rel="stylesheet" href="{% sass_src 'css/base.scss' %}"> 
   {% endblock %}
 
@@ -81,5 +84,6 @@
   </footer>
 </body>
 {% block postloadjs %}
+<script src="{% static 'materialize/js/bin/materialize.min.js' %}"></script>
 {% endblock %}
 </html>

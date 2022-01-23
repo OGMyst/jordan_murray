@@ -2713,7 +2713,7 @@ input[type=number]:not(.browser-default),
 input[type=search]:not(.browser-default),
 textarea.materialize-textarea {
   outline: none;
-  font-size: 16px;
+  font-size: 14px;
   padding: 5px 8px;
   box-shadow: none; }
   input:not([type]):disabled, input:not([type])[readonly="readonly"],
@@ -3248,8 +3248,6 @@ textarea {
 /* Remove default checkbox */
 [type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
-  position: absolute;
-  opacity: 0;
   pointer-events: none; }
 
 [type="checkbox"] {
@@ -3498,7 +3496,7 @@ select {
     height: 3rem;
     line-height: 3rem;
     width: 100%;
-    font-size: 16px;
+    font-size: 14px;
     margin: 0 0 8px 0;
     padding: 0;
     display: block;

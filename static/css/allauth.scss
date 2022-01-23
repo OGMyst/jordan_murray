@@ -15,7 +15,7 @@
 .controls {
     input{
         width: 400px;
-        height: 30px;
+        color: #143119;
     }
     label{
         color: azure;
@@ -32,6 +32,7 @@ input.checkboxinput {
     float: right;
     color: azure;
     font-size: 14px;
+    padding-top: 3px;
 }
 
 .login-CTAs {
