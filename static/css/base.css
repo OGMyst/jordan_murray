@@ -91,7 +91,7 @@ footer {
 
 .main-content {
   padding-top: 52px;
-  min-height: calc(100vh - 85px);
+  min-height: calc(100vh - 31.8px);
   display: flex;
   justify-content: center; }
 
