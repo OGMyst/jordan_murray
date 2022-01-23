@@ -6,29 +6,28 @@
 {% load account socialaccount %}
 
 {% block head_title %}
-    {% trans "Login" %}
+{% trans "Login" %}
 {% endblock %}
 
 {% block inner_content %}
 
-    <h1 class="page-header">{% trans "Login" %}</h1>
-    <form class="login" method="POST" action="{% url 'account_login' %}">
-        {% csrf_token %}
-        
-        {{ form|crispy }}
+<h1 class="page-header">{% trans "Login" %}</h1>
+<form class="login" method="POST" action="{% url 'account_login' %}">
+    {% csrf_token %}
 
-        {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
-        <a class="button forgot-password" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-        <div class="login-CTAs">
-            <a class="btn secondary-btn" href="{{ signup_url }}">Create Account</a>
-            <button class="btn" type="submit">{% trans "Login" %}</button>
-        </div>
-    </form>
+    {{ form|crispy }}
+
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <a class="button forgot-password" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+    <button class="btn" type="submit">{% trans "Login" %}</button>
+    <p>Don't have an account?</p>
+    <a class="btn secondary-btn" href="{{ signup_url }}">Create Account</a>
+</form>
 
 {% endblock %}
 
 {% block postloadjs %}
-    <script src="{% static 'js/login.js' %}"></script>    
+<script src="{% static 'js/login.js' %}"></script>
 {% endblock %}

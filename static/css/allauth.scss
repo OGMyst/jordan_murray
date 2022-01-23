@@ -1,23 +1,23 @@
-.allauth-container{
+.allauth-container {
     max-width: 1000px;
     padding-bottom: 10vh;
 }
 
-.main-content{
+.main-content {
     align-items: center;
 
-    h1{
+    h1 {
         text-align: center;
         padding-bottom: 50px;
     }
 }
 
 .controls {
-    input{
+    input {
         width: 400px;
         color: #143119;
     }
-    label{
+    label {
         color: azure;
     }
 }
@@ -27,7 +27,7 @@ input.checkboxinput {
     height: auto;
 }
 
-.forgot-password{
+.forgot-password {
     position: relative;
     float: right;
     color: azure;
@@ -35,7 +35,15 @@ input.checkboxinput {
     padding-top: 3px;
 }
 
-.login-CTAs {
-    display: flex;
-    justify-content: space-between;
+.login,
+.signup {
+    .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 60px;
+    }
+    p {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
 }

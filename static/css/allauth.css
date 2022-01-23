@@ -26,8 +26,15 @@ input.checkboxinput {
   font-size: 14px;
   padding-top: 3px; }
 
-.login-CTAs {
-  display: flex;
-  justify-content: space-between; }
+.login .btn,
+.signup .btn {
+  display: block;
+  width: 100%;
+  margin-bottom: 60px; }
+
+.login p,
+.signup p {
+  font-size: 14px;
+  margin-bottom: 5px; }
 
 /*# sourceMappingURL=allauth.css.map */
