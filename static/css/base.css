@@ -79,18 +79,19 @@ a {
   color: black; }
 
 .secondary-nav {
-  padding: 10px 80px;
+  padding: 10px 20px;
   background: #393939; }
   .secondary-nav ul {
     display: flex;
     justify-content: center;
     margin: 0;
-    list-style-type: none;
     color: azure;
     font-size: 16px;
     font-weight: 500; }
   .secondary-nav li {
     padding: 0 45px; }
+  .secondary-nav svg {
+    margin: 0px 5px; }
 
 /* --------------  GENERAL RULES -------------------*/
 .container {
@@ -125,6 +126,12 @@ footer {
   max-width: 1000px;
   margin: auto;
   padding: 80px 0; }
+  .content div {
+    text-align: center; }
+
+.flex-center {
+  display: flex;
+  justify-content: center; }
 
 /* --------------  FORM CONTROLS -------------------*/
 .control-group {
