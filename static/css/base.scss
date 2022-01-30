@@ -33,11 +33,14 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
-
+p{
+    font-size: 14px;
+}
 /* -------------- BUTTON RULES -------------------*/
-.primary-button {
+.primary-btn {
     background-color: black;
     border-radius: 10px;
+    border: 2px solid black;
 }
 
 /* -------------- NAV RULES -------------------*/

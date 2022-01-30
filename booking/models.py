@@ -92,6 +92,7 @@ class TeachingDetails(models.Model):
     instrument = models.CharField(max_length=32, choices=INSTRUMENTS)
     lesson_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     description = models.CharField(max_length=254, blank=True)
+    payment_date = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.instrument

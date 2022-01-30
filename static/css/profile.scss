@@ -1,0 +1,32 @@
+.overview {
+    .booking-card {
+        width: 450px;
+        margin: 16px auto;
+        padding: 15px 20px;
+        background: #373737;
+        border-radius: 10px;
+        box-shadow: 11px 11px 16px -4px rgba(0,0,0,0.27);
+    }
+    h4 {
+        text-align: left;
+        padding-bottom: 24px;
+    }
+    .card-info-slot {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 0 8px;
+    }
+
+    .slot-title {
+        font-weight: 700;
+    }
+    .inline-ctas{
+        display: flex;
+        justify-content: space-between;
+        padding-top: 4px;
+    }
+
+    .btn{
+        width: 150px;
+    }
+}

@@ -7,6 +7,8 @@ class TeachingDetailsAdmin(admin.ModelAdmin):
         'Address',
         'day',
         'time',
+        'duration',
+        'student_name',
         'instrument',
         'lesson_cost',
         'description',
