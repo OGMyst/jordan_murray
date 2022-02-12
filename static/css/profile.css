@@ -6,6 +6,9 @@
   border-radius: 10px;
   box-shadow: 11px 11px 16px -4px rgba(0, 0, 0, 0.27); }
 
+.overview h2 {
+  padding-bottom: 16px; }
+
 .overview h4 {
   text-align: left;
   padding-bottom: 24px; }
@@ -20,7 +23,8 @@
 
 .overview .inline-ctas {
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+  padding-top: 4px; }
 
 .overview .btn {
   width: 150px; }

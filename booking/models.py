@@ -52,7 +52,8 @@ class Booking(models.Model):
     cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     confirmed = models.BooleanField(default=False)
 
-
+    def __str__(self):
+        return self.contact_name + " " + self.booking_type + " " + str(self.id)
 class PerformanceDetails(models.Model):
     """
     Bookings for performances have specific details which separate them from the other booking types
@@ -81,7 +82,11 @@ class EquipmentHireDetails(models.Model):
 
 class TeachingDetails(models.Model):
     """
-    Bookings for teaching have specific details which separate them from the other booking types
+    Although date, time and place may change from lesson to lesson the TeachingDetails model
+    describes the accepted details. To show an example of how the TeachingDetails and
+    TeachingInstance models relate: changing the date on TeachingDetails will update all upcoming
+    lessons in the related TeachingInstances except for lessons that have already been moved from
+    the non-standard time.
     """
     booking = models.ForeignKey(Booking, on_delete=models.CASCADE, related_name='lesson')
     Address = models.ForeignKey(Address, on_delete=models.CASCADE, blank=True)
@@ -96,6 +101,17 @@ class TeachingDetails(models.Model):
 
     def __str__(self):
         return self.instrument
+
+class TeachingInstances(models.Model):
+    """
+    Encapsulates information relevant to individual lessons
+    """
+    teaching_details = models.ForeignKey(TeachingDetails, on_delete=models.CASCADE)
+    day = models.CharField(max_length=32, blank=True)
+    time = models.TimeField(blank=True, null=True)
+    duration = models.DurationField(blank=True, null=True)
+    lesson_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
 class Equipment(models.Model):
     """
     List of equipment available for hire

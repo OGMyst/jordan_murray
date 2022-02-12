@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Booking, AdminContact, PerformanceDetails, EquipmentHireDetails, TeachingDetails
+from .models import Booking, AdminContact, PerformanceDetails, EquipmentHireDetails, TeachingDetails, TeachingInstances
 class TeachingDetailsAdmin(admin.ModelAdmin):
 
     list_display = (
@@ -14,6 +14,9 @@ class TeachingDetailsAdmin(admin.ModelAdmin):
         'description',
     )
 
-admin.site.register([Booking, AdminContact, PerformanceDetails, EquipmentHireDetails])
+admin.site.register([
+    Booking, AdminContact, PerformanceDetails, EquipmentHireDetails,
+    TeachingInstances
+    ])
 
 admin.site.register(TeachingDetails, TeachingDetailsAdmin)
