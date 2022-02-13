@@ -1,0 +1,38 @@
+<div class="overview">
+    <h2>Overview</h2>
+    {% for key, booking in booking_details.items %}
+    <p>{{ value }}</p>
+    {% for key2,value2 in value.items %}
+    {% endfor %}
+    <div class="booking-card">
+        <h4>{{ booking.booking_name }}</h4>
+        <div class="card-info-slot">
+            <p class="slot-title">Performance dates and times</p>
+            {% for key, dt in booking.dates_and_times.concert.items %}
+                <p>{{ dt }}</p>
+            {% endfor %}
+        </div>
+        <div class="card-info-slot">
+            <p class="slot-title">Rehearsal dates and times</p>
+            {% for key, dt in booking.dates_and_times.rehearsal.items %}
+                <p>{{ dt }}</p>
+            {% endfor %}
+        </div>
+        <div class="card-info-slot">
+            <p class="slot-title">Concert dress</p>
+            <p>{{ booking.concert_dress }}</p>
+        </div>
+        <div class="card-info-slot">
+            <p class="slot-title">Total cost</p>
+            <p>{{ booking.cost }}</p>
+        </div>
+        <div class="inline-ctas">
+            <button class="btn secondary-btn">Write Review</button>
+            <button class="btn primary-btn">Update</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="calendar">
+    <h2>Calendar</h2>
+</div> 

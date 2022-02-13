@@ -46,6 +46,7 @@ class Booking(models.Model):
     booking_type = models.CharField(max_length=32, choices=BOOKING_TYPES)
     contact_email = models.EmailField(max_length=254)
     contact_name = models.CharField(max_length=50)
+    booking_name = models.CharField(max_length=50, blank=True,)
     date_submitted = models.DateField(default=datetime.date.today)
     booking_details = models.JSONField(encoder=None, decoder=None)
     userprofile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True, related_name='bookings')
@@ -66,6 +67,7 @@ class PerformanceDetails(models.Model):
     description = models.CharField(max_length=254, blank=True)
     start = models.DateTimeField(blank=True, null=True)
     finish = models.DateTimeField(blank=True, null=True)
+    concert_dress = models.CharField(max_length=254, blank=True)
 
 
 class EquipmentHireDetails(models.Model):
