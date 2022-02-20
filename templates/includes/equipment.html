@@ -1,0 +1,35 @@
+<div class="overview">
+    <h2>Overview</h2>
+    {% for key, booking in booking_details.items %}
+    <div class="booking-card">
+        <h4>{{ booking.booking_name }}</h4>
+        <div class="card-info-slot">
+            <p class="slot-title">No. of Days</p>
+            <p>{{ booking.numb_of_days }}</p>
+        </div>
+        <div class="card-info-slot">
+            <p class="slot-title">Hiring dates</p>
+            <p>{{ booking.hiring_dates }}</p>
+        </div>
+        <div class="card-info-slot">
+            <p class="slot-title">Pick up time</p>
+            <p>{{ booking.pick_up_time }}</p>
+        </div>
+        <div class="card-info-slot">
+            <p class="slot-title">Return time</p>
+            <p>{{ booking.return_time }}</p>
+        </div>
+        <div class="card-info-slot">
+            <p class="slot-title">Total cost</p>
+            <p>{{ booking.cost }}</p>
+        </div>
+        <div class="inline-ctas">
+            <button class="btn secondary-btn">Write Review</button>
+            <button class="btn primary-btn">Update</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="calendar">
+    <h2>Calendar</h2>
+</div> 
