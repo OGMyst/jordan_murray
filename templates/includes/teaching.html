@@ -28,4 +28,9 @@
 </div>
 <div class="calendar">
     <h2>Calendar</h2>
-</div> 
+    {% for key, detail in calendar_details.items %}
+    <div class="calendar-card">
+        <p>{{ detail }}</p>
+    </div>
+    {% endfor %}
+</div>

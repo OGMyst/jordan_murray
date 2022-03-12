@@ -104,14 +104,13 @@ class TeachingDetails(models.Model):
     def __str__(self):
         return self.instrument
 
-class TeachingInstances(models.Model):
+class TeachingInstance(models.Model):
     """
     Encapsulates information relevant to individual lessons
     """
     teaching_details = models.ForeignKey(TeachingDetails, on_delete=models.CASCADE)
-    day = models.CharField(max_length=32, blank=True)
-    time = models.TimeField(blank=True, null=True)
-    duration = models.DurationField(blank=True, null=True)
+    start = models.DateTimeField(blank=True, null=True)
+    finish = models.DateTimeField(blank=True, null=True)
     lesson_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
 class Equipment(models.Model):

@@ -2009,6 +2009,7 @@ ul:not(.browser-default) {
 
 a {
   text-decoration: none;
+  color: azure;
   -webkit-tap-highlight-color: transparent; }
 
 .valign-wrapper {

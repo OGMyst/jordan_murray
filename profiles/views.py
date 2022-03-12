@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from booking.models import PerformanceDetails, TeachingDetails, EquipmentHireDetails
+from booking.models import PerformanceDetails, TeachingDetails, EquipmentHireDetails, TeachingInstance
 from .models import UserProfile
 
 @method_decorator(login_required, name='dispatch')
@@ -52,9 +52,23 @@ class ProfilePageView(TemplateView):
             booking__in=booking_ids
         )
 
-        # ------------------------------ PERFORMANCE SELECTED --------------------------------
-        #performance bookings have their instances combined when viewed on frontends
+        #performance bookings have their instances combined when viewed on frontend
         perfomances = {}
+        calendar_details = {}
+        # ------------------------------ LESSON INSTANCES --------------------------------
+        if section == 'teaching':
+
+            detail_ids = booking_details.values("id")
+            lessons = TeachingInstance.objects.filter(teaching_details__in=detail_ids)
+            for lesson in lessons:
+                perfomances[lesson.teaching_details_id] = {}
+                l_inst = perfomances[lesson.teaching_details_id]
+                l_inst['date'] = f'{lesson.start:%A %d %B}'
+                l_inst['student_name'] = lesson.teaching_details.student_name
+                l_inst['time'] = f'{lesson.start:%H:%M} - {lesson.finish:%H:%M}'
+                calendar_details = perfomances
+        # ------------------------------ PERFORMANCE SELECTED --------------------------------
+
         if section == 'performance':
             # To index concert and rehearsal entries into the dict
             r_counter = 0
@@ -111,5 +125,8 @@ class ProfilePageView(TemplateView):
             booking_details = perfomances
 
         context["booking_details"] = booking_details
+        if calendar_details:
+            context["calendar_details"] = calendar_details
+
         context["include"] = page_objects[section]["include"]
         return context

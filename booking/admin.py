@@ -1,7 +1,9 @@
 from django.contrib import admin
-from .models import Booking, AdminContact, PerformanceDetails, EquipmentHireDetails, TeachingDetails, TeachingInstances
+from .models import Booking, AdminContact, PerformanceDetails, EquipmentHireDetails, TeachingDetails, TeachingInstance
 class TeachingDetailsAdmin(admin.ModelAdmin):
-
+    """
+    Stop bothering me
+    """
     list_display = (
         'booking',
         'Address',
@@ -16,7 +18,7 @@ class TeachingDetailsAdmin(admin.ModelAdmin):
 
 admin.site.register([
     Booking, AdminContact, PerformanceDetails, EquipmentHireDetails,
-    TeachingInstances
+    TeachingInstance
     ])
 
 admin.site.register(TeachingDetails, TeachingDetailsAdmin)
