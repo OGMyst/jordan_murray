@@ -25,18 +25,21 @@ class ProfilePageView(TemplateView):
                 "b_type": "TEACHING",
                 "model": TeachingDetails,
                 "include": "includes/teaching.html",
+                'order': 'id'
             },
             
             "performance": {
                 "b_type": "PERFORMANCE",
                 "model": PerformanceDetails,
                 "include": "includes/performance.html",
+                'order': 'start'
             },
 
             "equipment": {
                 "b_type": "EQUIPMENT",
                 "model": EquipmentHireDetails,
                 "include": "includes/equipment.html",
+                'order': 'pick_up_time'
             },
         }
         profile = get_object_or_404(UserProfile, user=self.request.user)
@@ -50,23 +53,28 @@ class ProfilePageView(TemplateView):
         # Selects relevant booking details model and filters results based on IDs
         booking_details = (page_objects[section]["model"]).objects.filter(
             booking__in=booking_ids
-        )
+        ).order_by(page_objects[section]["order"])
 
         #performance bookings have their instances combined when viewed on frontend
-        perfomances = {}
+        overview_details = {}
         calendar_details = {}
+
+
         # ------------------------------ LESSON INSTANCES --------------------------------
         if section == 'teaching':
 
             detail_ids = booking_details.values("id")
             lessons = TeachingInstance.objects.filter(teaching_details__in=detail_ids)
             for lesson in lessons:
-                perfomances[lesson.teaching_details_id] = {}
-                l_inst = perfomances[lesson.teaching_details_id]
+                calendar_details[lesson.id] = {}
+                l_inst = calendar_details[lesson.id]
                 l_inst['date'] = f'{lesson.start:%A %d %B}'
                 l_inst['student_name'] = lesson.teaching_details.student_name
                 l_inst['time'] = f'{lesson.start:%H:%M} - {lesson.finish:%H:%M}'
-                calendar_details = perfomances
+                l_inst['instrument'] = lesson.teaching_details.instrument
+                overview_details = booking_details
+
+
         # ------------------------------ PERFORMANCE SELECTED --------------------------------
 
         if section == 'performance':
@@ -76,8 +84,8 @@ class ProfilePageView(TemplateView):
 
             # Make an empty dict for each performance booking then insert booking name
             for  b_instance in all_bookings:
-                perfomances[b_instance.id] = {}
-                perf_inst = perfomances[b_instance.id] #to save on horizontal space
+                overview_details[b_instance.id] = {}
+                perf_inst = overview_details[b_instance.id] #to save on horizontal space
                 perf_inst['dates_and_times'] = {}
                 perf_inst['dates_and_times']['rehearsal'] = {}
                 perf_inst['dates_and_times']['concert'] = {}
@@ -86,47 +94,52 @@ class ProfilePageView(TemplateView):
 
             #Using booking ID to find the relevant place in the dict -> Add booking details
             for detail in booking_details:
-                d_inst = perfomances[detail.booking.id]
-                dt_converted = f'{detail.start.date()} {detail.start.time()}-{detail.finish.time()}'
+                d_inst = overview_details[detail.booking.id]
+                detail_date = f'{detail.start.date():%d/%m/%y}'
+                detail_start = f'{detail.start.time():%H:%M}'
+                detail_finish = f'{detail.finish.time():%H:%M}'
+                slot = f'{detail_date} |  {detail_start} - {detail_finish}'
 
                 # So dates can be grouped by performance type more easily on frontend
                 if detail.performance_type == 'REHEARSAL':
-                    d_inst['dates_and_times']['rehearsal'][r_counter] = dt_converted
+                    d_inst['dates_and_times']['rehearsal'][r_counter] = slot
                     r_counter += 1
                 else:
-                    d_inst['dates_and_times']['concert'][c_counter] = dt_converted
+                    d_inst['dates_and_times']['concert'][c_counter] = slot
                     c_counter += 1
                 d_inst['concert_dress'] = detail.concert_dress
                 d_inst['description'] = detail.description
-            booking_details = perfomances
+
+            for detail in booking_details:
+                calendar_details[detail.id] = {}
+                cal_slot = calendar_details[detail.id]
+                cal_slot['booking_name'] = detail.booking.booking_name
+                cal_slot['date'] = f'{detail.start.date():%A %d %B}'
+                cal_slot['time'] = f'{detail.start.time():%H:%M} - {detail.finish.time():%H:%M}'
+                cal_slot['performance_type'] = detail.performance_type
+
+
 
 
         # ------------------------------ EQUIPMENT SELECTED --------------------------------
         if section == 'equipment':
-            for  equipment in all_bookings:
-                perfomances[equipment.id] = {}
-                equip_inst = perfomances[equipment.id] #to save on horizontal space
-                equip_inst['booking_name'] = equipment.booking_name
-                equip_inst['cost'] = equipment.cost
 
-            #Using booking ID to find the relevant place in the dict -> Add booking details
-            for detail in booking_details:
-                d_inst = perfomances[detail.booking.id]
-                hiring_dates = f'{detail.pick_up_time.date()} - {detail.return_time.date()}'
-                numb_of_days = (detail.return_time.date() - detail.pick_up_time.date()).days
-                pick_up_time = detail.pick_up_time.time()
-                return_time = detail.return_time.time()
+            for equipment in booking_details:
+                hiring_dates = f'{equipment.pick_up_time.date()} - {equipment.return_time.date()}'
+                numb_of_days = (equipment.return_time.date() - equipment.pick_up_time.date()).days
 
-                d_inst['hiring_dates'] = hiring_dates
-                d_inst['numb_of_days'] = numb_of_days
-                d_inst['pick_up_time'] = pick_up_time
-                d_inst['return_time'] = return_time
+                overview_details[equipment.booking.id] = {}
+                equip_inst = overview_details[equipment.booking.id]
+                equip_inst['booking_name'] = equipment.booking.booking_name
+                equip_inst['cost'] = equipment.booking.cost
+                equip_inst['hiring_dates'] = hiring_dates
+                equip_inst['numb_of_days'] = numb_of_days
+                equip_inst['pick_up_time'] = equipment.pick_up_time.time()
+                equip_inst['return_time'] = equipment.return_time.time()
+                equip_inst['date'] = f'{equipment.pick_up_time.date():%A %d %B}'
 
-            booking_details = perfomances
-
-        context["booking_details"] = booking_details
+        context["booking_details"] = overview_details
         if calendar_details:
             context["calendar_details"] = calendar_details
-
         context["include"] = page_objects[section]["include"]
         return context

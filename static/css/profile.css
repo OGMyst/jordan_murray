@@ -29,4 +29,35 @@
 .overview .btn {
   width: 150px; }
 
+.calendar h2 {
+  padding-bottom: 16px; }
+
+.calendar h4 {
+  text-align: left;
+  padding-bottom: 24px; }
+
+.calendar .calendar-card {
+  width: 450px;
+  margin: 16px auto; }
+
+.calendar .calendar-card-inner {
+  background-color: rgba(39, 76, 131, 0.56);
+  border-radius: 10px;
+  box-shadow: 11px 11px 16px -4px rgba(0, 0, 0, 0.27);
+  padding: 15px 20px;
+  display: flex; }
+
+.calendar .calendar-info {
+  text-align: left; }
+
+.calendar .calendar-title {
+  font-weight: 700;
+  padding-bottom: 8px; }
+
+.calendar .calendar-view-more {
+  width: 110px;
+  margin: auto; }
+  .calendar .calendar-view-more .iconify {
+    vertical-align: middle !important; }
+
 /*# sourceMappingURL=profile.css.map */

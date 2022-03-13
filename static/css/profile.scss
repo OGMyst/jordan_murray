@@ -5,9 +5,9 @@
         padding: 15px 20px;
         background: #373737;
         border-radius: 10px;
-        box-shadow: 11px 11px 16px -4px rgba(0,0,0,0.27);
+        box-shadow: 11px 11px 16px -4px rgba(0, 0, 0, 0.27);
     }
-    h2{
+    h2 {
         padding-bottom: 16px;
     }
     h4 {
@@ -23,13 +23,55 @@
     .slot-title {
         font-weight: 700;
     }
-    .inline-ctas{
+    .inline-ctas {
         display: flex;
         justify-content: space-between;
         padding-top: 4px;
     }
 
-    .btn{
+    .btn {
         width: 150px;
     }
+}
+
+.calendar {
+    h2 {
+        padding-bottom: 16px;
+    }
+
+    h4 {
+        text-align: left;
+        padding-bottom: 24px;
+    }
+
+    .calendar-card {
+        width: 450px;
+        margin: 16px auto;
+    }
+
+    .calendar-card-inner {
+        background-color: rgba(39, 76, 131, 0.56);
+        border-radius: 10px;
+        box-shadow: 11px 11px 16px -4px rgba(0, 0, 0, 0.27);
+        padding: 15px 20px;
+        display: flex;
+    }
+
+    .calendar-info {
+        text-align: left;
+    }
+
+    .calendar-title {
+        font-weight: 700;
+        padding-bottom: 8px;
+    }
+
+    .calendar-view-more {
+        width: 110px;
+        margin: auto;
+
+        .iconify{
+            vertical-align: middle !important;
+        }
+      }
 }
