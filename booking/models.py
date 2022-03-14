@@ -55,7 +55,7 @@ class Booking(models.Model):
 
     def __str__(self):
         return self.contact_name + " " + self.booking_type + " " + str(self.id)
-class PerformanceDetails(models.Model):
+class PerformanceDetail(models.Model):
     """
     Bookings for performances have specific details which separate them from the other booking types
     """
@@ -70,7 +70,7 @@ class PerformanceDetails(models.Model):
     concert_dress = models.CharField(max_length=254, blank=True)
 
 
-class EquipmentHireDetails(models.Model):
+class EquipmentHireDetail(models.Model):
     """
     Bookings for equipment hire have specific details
     which separate them from the other booking types
@@ -82,7 +82,7 @@ class EquipmentHireDetails(models.Model):
     equipment_hired = models.JSONField(encoder=None, decoder=None)
     description = models.CharField(max_length=254, blank=True)
 
-class TeachingDetails(models.Model):
+class TeachingDetail(models.Model):
     """
     Although date, time and place may change from lesson to lesson the TeachingDetails model
     describes the accepted details. To show an example of how the TeachingDetails and
@@ -108,7 +108,7 @@ class TeachingInstance(models.Model):
     """
     Encapsulates information relevant to individual lessons
     """
-    teaching_details = models.ForeignKey(TeachingDetails, on_delete=models.CASCADE)
+    teaching_details = models.ForeignKey(TeachingDetail, on_delete=models.CASCADE)
     start = models.DateTimeField(blank=True, null=True)
     finish = models.DateTimeField(blank=True, null=True)
     lesson_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)

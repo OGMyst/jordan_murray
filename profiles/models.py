@@ -29,6 +29,9 @@ class Address(models.Model):
     """
     Stores addresses for the many potential venue addresses per user
     """
+    class Meta:
+        verbose_name_plural = "Addresses"
+
     userprofile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, blank=True)
     street_address1 = models.CharField(max_length=80)
     street_address2 = models.CharField(max_length=80)

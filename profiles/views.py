@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from booking.models import PerformanceDetails, TeachingDetails, EquipmentHireDetails, TeachingInstance
+from booking.models import PerformanceDetail, TeachingDetail, EquipmentHireDetail, TeachingInstance
 from .models import UserProfile
 
 @method_decorator(login_required, name='dispatch')
@@ -23,21 +23,21 @@ class ProfilePageView(TemplateView):
         page_objects = {
             "teaching": {
                 "b_type": "TEACHING",
-                "model": TeachingDetails,
+                "model": TeachingDetail,
                 "include": "includes/teaching.html",
                 'order': 'id'
             },
             
             "performance": {
                 "b_type": "PERFORMANCE",
-                "model": PerformanceDetails,
+                "model": PerformanceDetail,
                 "include": "includes/performance.html",
                 'order': 'start'
             },
 
             "equipment": {
                 "b_type": "EQUIPMENT",
-                "model": EquipmentHireDetails,
+                "model": EquipmentHireDetail,
                 "include": "includes/equipment.html",
                 'order': 'pick_up_time'
             },

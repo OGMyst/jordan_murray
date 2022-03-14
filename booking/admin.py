@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Booking, AdminContact, PerformanceDetails, EquipmentHireDetails, TeachingDetails, TeachingInstance
+from .models import Booking, AdminContact, PerformanceDetail, EquipmentHireDetail, TeachingDetail, TeachingInstance
 
 
 class TeachingDetailsAdmin(admin.ModelAdmin):
@@ -17,7 +17,7 @@ class TeachingDetailsAdmin(admin.ModelAdmin):
         'lesson_cost',
         'description',
     )
-class PerformanceDetailsAdmin(admin.ModelAdmin):
+class PerformanceDetailAdmin(admin.ModelAdmin):
     """
     Stop bothering me
     """
@@ -34,9 +34,9 @@ class PerformanceDetailsAdmin(admin.ModelAdmin):
     ordering = ('start',)
 
 admin.site.register([
-    Booking, AdminContact, EquipmentHireDetails,
+    Booking, AdminContact, EquipmentHireDetail,
     TeachingInstance
     ])
 
-admin.site.register(TeachingDetails, TeachingDetailsAdmin)
-admin.site.register(PerformanceDetails, PerformanceDetailsAdmin)
+admin.site.register(TeachingDetail, TeachingDetailsAdmin)
+admin.site.register(PerformanceDetail, PerformanceDetailAdmin)
