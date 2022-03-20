@@ -58,7 +58,10 @@ class ProfilePageView(TemplateView):
         #performance bookings have their instances combined when viewed on frontend
         overview_details = {}
         calendar_details = {}
-
+        dropdown = {
+            'rehearsal': False,
+            'concert': False,
+        }
 
         # ------------------------------ LESSON INSTANCES --------------------------------
         if section == 'teaching':
@@ -98,7 +101,7 @@ class ProfilePageView(TemplateView):
                 detail_date = f'{detail.start.date():%d/%m/%y}'
                 detail_start = f'{detail.start.time():%H:%M}'
                 detail_finish = f'{detail.finish.time():%H:%M}'
-                slot = f'{detail_date} |  {detail_start} - {detail_finish}'
+                slot = f'{detail_start} - {detail_finish} | {detail_date}'
 
                 # So dates can be grouped by performance type more easily on frontend
                 if detail.performance_type == 'REHEARSAL':
@@ -118,8 +121,10 @@ class ProfilePageView(TemplateView):
                 cal_slot['time'] = f'{detail.start.time():%H:%M} - {detail.finish.time():%H:%M}'
                 cal_slot['performance_type'] = detail.performance_type
 
-
-
+            if r_counter:
+                dropdown['rehearsal'] = True
+            if c_counter > 1:
+                dropdown['concert'] = True
 
         # ------------------------------ EQUIPMENT SELECTED --------------------------------
         if section == 'equipment':
@@ -142,4 +147,5 @@ class ProfilePageView(TemplateView):
         if calendar_details:
             context["calendar_details"] = calendar_details
         context["include"] = page_objects[section]["include"]
+        context["dropdown"] = dropdown
         return context

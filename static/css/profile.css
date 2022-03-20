@@ -2,7 +2,7 @@
   width: 450px;
   margin: 16px auto;
   padding: 15px 20px;
-  background: #373737;
+  background: #253a59;
   border-radius: 10px;
   box-shadow: 11px 11px 16px -4px rgba(0, 0, 0, 0.27); }
 
@@ -16,7 +16,9 @@
 .overview .card-info-slot {
   display: flex;
   justify-content: space-between;
-  padding: 0 0 8px; }
+  padding: 0 0 16px; }
+  .overview .card-info-slot * {
+    font-weight: 300; }
 
 .overview .slot-title {
   font-weight: 700; }
@@ -28,6 +30,18 @@
 
 .overview .btn {
   width: 150px; }
+
+.overview .dropdown-trigger {
+  font-size: 14px; }
+
+.overview .iconify {
+  vertical-align: middle !important;
+  margin-bottom: 2px; }
+
+.overview .dropdown-content li {
+  padding: 3px 0;
+  border-bottom: 1px solid #bfbfbf2e;
+  font-weight: 300; }
 
 .calendar h2 {
   padding-bottom: 16px; }

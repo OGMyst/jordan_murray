@@ -3,7 +3,7 @@
         width: 450px;
         margin: 16px auto;
         padding: 15px 20px;
-        background: #373737;
+        background: #253a59;
         border-radius: 10px;
         box-shadow: 11px 11px 16px -4px rgba(0, 0, 0, 0.27);
     }
@@ -17,7 +17,11 @@
     .card-info-slot {
         display: flex;
         justify-content: space-between;
-        padding: 0 0 8px;
+        padding: 0 0 16px;
+
+        *{
+            font-weight: 300;
+        }
     }
 
     .slot-title {
@@ -31,6 +35,21 @@
 
     .btn {
         width: 150px;
+    }
+
+    .dropdown-trigger{
+        font-size: 14px;
+    }
+
+    .iconify{
+        vertical-align: middle !important;
+        margin-bottom: 2px;
+    }
+
+    .dropdown-content li{
+        padding: 3px 0;
+        border-bottom: 1px solid #bfbfbf2e;
+        font-weight: 300;
     }
 }
 

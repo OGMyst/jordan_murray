@@ -16,12 +16,15 @@
   top: 0;
   z-index: 9999; // TODO: Check if this doesn't break other things
   transform-origin: 0 0;
+  padding: 7px 15px;
+  border-radius: 5px;
+  border: 1.5px solid #00000075;
 
 
   li {
-    &:hover, &.active {
-      background-color: $dropdown-hover-bg-color;
-    }
+    // &:hover, &.active {
+    //   background-color: $dropdown-hover-bg-color;
+    // }
 
     &:focus {
       outline: none;
@@ -57,20 +60,20 @@
 
 
     clear: both;
-    color: $off-black;
+    color: #fff;
     cursor: pointer;
-    min-height: $dropdown-item-height;
     line-height: 1.5rem;
     width: 100%;
     text-align: left;
+    font-size: 13px;
   }
 }
 
-body.keyboard-focused {
-  .dropdown-content li:focus {
-    background-color: darken($dropdown-hover-bg-color, 8%);
-  }
-}
+// body.keyboard-focused {
+//   .dropdown-content li:focus {
+//     background-color: darken($dropdown-hover-bg-color, 8%);
+//   }
+// }
 
 // Input field specificity bugfix
 .input-field.col .dropdown-content [type="checkbox"] + label {

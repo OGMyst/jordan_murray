@@ -54,7 +54,7 @@ class Booking(models.Model):
     confirmed = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.contact_name + " " + self.booking_type + " " + str(self.id)
+        return self.contact_name + " - " + self.booking_name
 class PerformanceDetail(models.Model):
     """
     Bookings for performances have specific details which separate them from the other booking types
@@ -82,6 +82,8 @@ class EquipmentHireDetail(models.Model):
     equipment_hired = models.JSONField(encoder=None, decoder=None)
     description = models.CharField(max_length=254, blank=True)
 
+    def __str__(self):
+        return str(self.pick_up_time.date()) + " - " + self.booking.booking_name  
 class TeachingDetail(models.Model):
     """
     Although date, time and place may change from lesson to lesson the TeachingDetails model
@@ -102,7 +104,7 @@ class TeachingDetail(models.Model):
     payment_date = models.DateField(blank=True, null=True)
 
     def __str__(self):
-        return self.instrument
+        return self.student_name + " - " + self.instrument.lower().capitalize()
 
 class TeachingInstance(models.Model):
     """
@@ -113,6 +115,8 @@ class TeachingInstance(models.Model):
     finish = models.DateTimeField(blank=True, null=True)
     lesson_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
+    def __str__(self):
+        return self.teaching_details.student_name + " - " + str(self.start.date())
 class Equipment(models.Model):
     """
     List of equipment available for hire

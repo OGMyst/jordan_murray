@@ -40,4 +40,6 @@ class Address(models.Model):
     county = models.CharField(max_length=80, blank=True)
     postcode = models.CharField(max_length=20)
     country = CountryField(blank_label="Country *", default='GB')
-            
+
+    def __str__(self):
+        return self.street_address1
