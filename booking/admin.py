@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Booking, AdminContact, PerformanceDetail, EquipmentHireDetail, TeachingDetail, TeachingInstance
+from .models import Booking, AdminContact, PerformanceDetail
+from .models import EquipmentHireDetail, TeachingDetail, TeachingInstance
 
 
 class TeachingDetailsAdmin(admin.ModelAdmin):

@@ -1,53 +1,47 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, ContextMixin
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from booking.models import PerformanceDetail, TeachingDetail, EquipmentHireDetail, TeachingInstance
+from booking.models import Booking
 from .models import UserProfile
+from django.contrib.auth.mixins import UserPassesTestMixin
 
-@method_decorator(login_required, name='dispatch')
-class ProfilePageView(TemplateView):
+# Used to get relevant information for the selected page
+page_objects = {
+    "teaching": {
+        "b_type": "TEACHING",
+        "model": TeachingDetail,
+        "include": "includes/teaching.html",
+        'order': 'id'
+    },
+
+    "performance": {
+        "b_type": "PERFORMANCE",
+        "model": PerformanceDetail,
+        "include": "includes/performance.html",
+        'order': 'start'
+    },
+
+    "equipment": {
+        "b_type": "EQUIPMENT",
+        "model": EquipmentHireDetail,
+        "include": "includes/equipment.html",
+        'order': 'pick_up_time'
+    },
+}
+
+class ProfileContextMixin(ContextMixin): # pylint: disable=too-few-public-methods
     """
-    profile thing
+    gets bookings by type and filtered by user.
+    if user is a superuser then all bookings of selected type are returned
     """
+    @staticmethod
+    def booking_information(section, all_bookings, context):
 
-    template_name = "profile/profile.html"
-
-    def get_context_data(self, section, **kwargs):
         """
-        Gets relevant data and which include template to use for profile page
+        gets booking by type
         """
-        context = super().get_context_data(**kwargs)
-
-        # Used to get relevant information for the selected page
-        page_objects = {
-            "teaching": {
-                "b_type": "TEACHING",
-                "model": TeachingDetail,
-                "include": "includes/teaching.html",
-                'order': 'id'
-            },
-            
-            "performance": {
-                "b_type": "PERFORMANCE",
-                "model": PerformanceDetail,
-                "include": "includes/performance.html",
-                'order': 'start'
-            },
-
-            "equipment": {
-                "b_type": "EQUIPMENT",
-                "model": EquipmentHireDetail,
-                "include": "includes/equipment.html",
-                'order': 'pick_up_time'
-            },
-        }
-        profile = get_object_or_404(UserProfile, user=self.request.user)
-
-        # Gets booking instances for selected booking type
-        all_bookings = profile.bookings.filter(
-            booking_type=page_objects[section]["b_type"]
-        )
         booking_ids = all_bookings.values("id")
 
         # Selects relevant booking details model and filters results based on IDs
@@ -148,4 +142,49 @@ class ProfilePageView(TemplateView):
             context["calendar_details"] = calendar_details
         context["include"] = page_objects[section]["include"]
         context["dropdown"] = dropdown
+        return context
+
+@method_decorator(login_required, name='dispatch')
+class ProfilePageView(TemplateView, ProfileContextMixin):
+    """
+    For all users except superusers
+    """
+
+    template_name = "profile/profile.html"
+
+    def get_context_data(self, section, **kwargs):
+        """
+        Calls mixin to fetch the correct data by passing the bookings available
+        to the user and the selected booking type
+        """
+        context = super().get_context_data(**kwargs)
+        profile = get_object_or_404(UserProfile, user=self.request.user)
+        all_bookings = profile.bookings.filter(
+            booking_type=page_objects[section]["b_type"]
+        )
+        context = (self.booking_information(section, all_bookings, context))
+        return context
+
+class ProfileAdminPageView(UserPassesTestMixin, TemplateView, ProfileContextMixin):
+    """
+    View for superuser to manage all bookings
+    """
+    template_name = "profile/profile.html"
+
+    def test_func(self):
+        """
+        User must be a superuser to access all bookings
+        """
+        return self.request.user.is_superuser
+
+    def get_context_data(self, section, **kwargs):
+        """
+        Calls mixin to fetch all bookings filtered by selected booking type
+        """
+        if not section:
+            section = 'teaching'
+
+        context = super().get_context_data(**kwargs)
+        all_bookings = Booking.objects.all()
+        context = (self.booking_information(section, all_bookings, context))
         return context
