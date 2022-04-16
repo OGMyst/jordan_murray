@@ -52,10 +52,6 @@ class ProfileContextMixin(ContextMixin): # pylint: disable=too-few-public-method
         #performance bookings have their instances combined when viewed on frontend
         overview_details = {}
         calendar_details = {}
-        dropdown = {
-            'rehearsal': False,
-            'concert': False,
-        }
 
         # ------------------------------ LESSON INSTANCES --------------------------------
         if section == 'teaching':
@@ -63,62 +59,60 @@ class ProfileContextMixin(ContextMixin): # pylint: disable=too-few-public-method
             detail_ids = booking_details.values("id")
             lessons = TeachingInstance.objects.filter(teaching_details__in=detail_ids)
             for lesson in lessons:
-                calendar_details[lesson.id] = {}
-                l_inst = calendar_details[lesson.id]
-                l_inst['date'] = f'{lesson.start:%A %d %B}'
-                l_inst['student_name'] = lesson.teaching_details.student_name
-                l_inst['time'] = f'{lesson.start:%H:%M} - {lesson.finish:%H:%M}'
-                l_inst['instrument'] = lesson.teaching_details.instrument
+                calendar_details[lesson.id] = {
+                    'date': f'{lesson.start:%A %d %B}',
+                    'student_name': lesson.teaching_details.student_name,
+                    'time': f'{lesson.start:%H:%M} - {lesson.finish:%H:%M}',
+                    'instrument': lesson.teaching_details.instrument,
+                }
                 overview_details = booking_details
 
 
         # ------------------------------ PERFORMANCE SELECTED --------------------------------
 
         if section == 'performance':
-            # To index concert and rehearsal entries into the dict
-            r_counter = 0
-            c_counter = 0
 
-            # Make an empty dict for each performance booking then insert booking name
-            for  b_instance in all_bookings:
-                overview_details[b_instance.id] = {}
-                perf_inst = overview_details[b_instance.id] #to save on horizontal space
-                perf_inst['dates_and_times'] = {}
-                perf_inst['dates_and_times']['rehearsal'] = {}
-                perf_inst['dates_and_times']['concert'] = {}
-                perf_inst['booking_name'] = b_instance.booking_name
-                perf_inst['cost'] = b_instance.cost
+            for booking in all_bookings:
+                overview_details[booking.id] = {
+                    'dates_and_times': {
+                        'rehearsal': {
+                            'dropdown': 0,
+                            'slots':{
+                            }
+                        },
+                        'performance': {
+                            'dropdown': 0,
+                            'slots':{
+                            }
+                        }
+                    }
+                }
 
             #Using booking ID to find the relevant place in the dict -> Add booking details
             for detail in booking_details:
+
                 d_inst = overview_details[detail.booking.id]
+                d_inst.update({
+                    'booking_name': detail.booking.booking_name,
+                    'cost': detail.booking.cost,
+                    'concert_dress': detail.concert_dress,
+                    'description': detail.description,
+                })
                 detail_date = f'{detail.start.date():%d/%m/%y}'
                 detail_start = f'{detail.start.time():%H:%M}'
                 detail_finish = f'{detail.finish.time():%H:%M}'
                 slot = f'{detail_start} - {detail_finish} | {detail_date}'
 
                 # So dates can be grouped by performance type more easily on frontend
-                if detail.performance_type == 'REHEARSAL':
-                    d_inst['dates_and_times']['rehearsal'][r_counter] = slot
-                    r_counter += 1
-                else:
-                    d_inst['dates_and_times']['concert'][c_counter] = slot
-                    c_counter += 1
-                d_inst['concert_dress'] = detail.concert_dress
-                d_inst['description'] = detail.description
+                d_inst['dates_and_times'][detail.performance_type.lower()]['slots'][slot] = slot
+                d_inst['dates_and_times'][detail.performance_type.lower()]['dropdown'] += 1
 
-            for detail in booking_details:
-                calendar_details[detail.id] = {}
-                cal_slot = calendar_details[detail.id]
-                cal_slot['booking_name'] = detail.booking.booking_name
-                cal_slot['date'] = f'{detail.start.date():%A %d %B}'
-                cal_slot['time'] = f'{detail.start.time():%H:%M} - {detail.finish.time():%H:%M}'
-                cal_slot['performance_type'] = detail.performance_type
-
-            if r_counter:
-                dropdown['rehearsal'] = True
-            if c_counter > 1:
-                dropdown['concert'] = True
+                calendar_details[detail.id] = {
+                    'booking_name': detail.booking.booking_name,
+                    'date': f'{detail.start.date():%A %d %B}',
+                    'time': f'{detail.start.time():%H:%M} - {detail.finish.time():%H:%M}',
+                    'performance_type': detail.performance_type,
+                }
 
         # ------------------------------ EQUIPMENT SELECTED --------------------------------
         if section == 'equipment':
@@ -127,21 +121,24 @@ class ProfileContextMixin(ContextMixin): # pylint: disable=too-few-public-method
                 hiring_dates = f'{equipment.pick_up_time.date()} - {equipment.return_time.date()}'
                 numb_of_days = (equipment.return_time.date() - equipment.pick_up_time.date()).days
 
-                overview_details[equipment.booking.id] = {}
-                equip_inst = overview_details[equipment.booking.id]
-                equip_inst['booking_name'] = equipment.booking.booking_name
-                equip_inst['cost'] = equipment.booking.cost
-                equip_inst['hiring_dates'] = hiring_dates
-                equip_inst['numb_of_days'] = numb_of_days
-                equip_inst['pick_up_time'] = equipment.pick_up_time.time()
-                equip_inst['return_time'] = equipment.return_time.time()
-                equip_inst['date'] = f'{equipment.pick_up_time.date():%A %d %B}'
+                overview_details[equipment.booking.id] = {
+                    'booking_name': equipment.booking.booking_name,
+                    'cost': equipment.booking.cost,
+                    'hiring_dates': hiring_dates,
+                    'numb_of_days': numb_of_days,
+                    'pick_up_time': equipment.pick_up_time.time(),
+                    'return_time': equipment.return_time.time(),
+                    'date': f'{equipment.pick_up_time.date():%A %d %B}'
+                }
 
-        context["booking_details"] = overview_details
-        if calendar_details:
-            context["calendar_details"] = calendar_details
-        context["include"] = page_objects[section]["include"]
-        context["dropdown"] = dropdown
+                calendar_details = overview_details
+
+        context.update({
+            'booking_details': overview_details,
+            'include': page_objects[section]["include"],
+            'calendar_details': calendar_details
+
+        })
         return context
 
 @method_decorator(login_required, name='dispatch')
