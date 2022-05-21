@@ -1,6 +1,5 @@
-<div class="overview">
-    <h2>Overview</h2>
-    {% for key, booking in booking_details.items %}
+{% if booking_details.equipment %}
+    {% for key, booking in booking_details.equipment.items %}
     <div class="booking-card">
         <h4>{{ booking.booking_name }}</h4>
         <div class="card-info-slot">
@@ -29,22 +28,4 @@
         </div>
     </div>
     {% endfor %}
-</div>
-<div class="calendar">
-    <h2>Calendar</h2>
-    {% for key, booking in booking_details.items %}
-    <div class="calendar-card">
-        <h4>{{ booking.date }}</h4>
-        <div class="calendar-card-inner">
-            <div class="calendar-info">
-                <p class="calendar-title">{{ booking.booking_name }}</p>
-                <p>Pick up: {{ booking.pick_up_time }}</p>
-                <p>Return: {{ booking.return_time }}</p>
-            </div>
-            <div class="calendar-view-more">
-                <p>View more <span class="iconify-inline" data-icon="bi:arrow-right-circle"></span></p>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div> 
+{% endif %}

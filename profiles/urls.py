@@ -1,7 +1,6 @@
 from django.urls import path
-from .views import ProfilePageView, ProfileAdminPageView
+from .views import ProfilePageView
 
 urlpatterns = [
-    path('<section>', ProfilePageView.as_view()),
-    path('admin/<section>', ProfileAdminPageView.as_view()),
+    path('', ProfilePageView.as_view()),
 ]

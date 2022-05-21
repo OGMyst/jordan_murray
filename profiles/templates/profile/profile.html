@@ -43,7 +43,31 @@
     <section>
         <div class="container">
             <div class="content flex-center bookings-container">
-                {% include include %}
+                <div class="overview">
+                    <h2>Overview</h2>
+                    {% include 'includes/equipment.html' %}
+                    {% include 'includes/teaching.html' %}
+                    {% include 'includes/performance.html' %}
+                </div>
+                <div class="calendar">
+                    <h2>Calendar</h2>
+                    {% for key, calendar in calendar_details.items %}
+                    <div class="calendar-card">
+                        <h4>{{ calendar.date }}</h4>
+                        <div class="calendar-card-inner">
+                            <div class="calendar-info">
+                                <p class="calendar-title">{{ calendar.title }}</p>
+                                {% for key, extra in calendar.extras.items %}
+                                    <p>{{ extra }}</p>
+                                {% endfor %}
+                            </div>
+                            <div class="calendar-view-more">
+                                <p>View more <span class="iconify-inline" data-icon="bi:arrow-right-circle"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div> 
             </div>
         </div>
     </section>
