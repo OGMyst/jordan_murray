@@ -3,7 +3,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Button, Div, Submit, HTML, Field
 from crispy_forms.bootstrap import FormActions
 from django.contrib.postgres.forms import SimpleArrayField, SplitArrayField
-from .models import Booking
+from .models import Booking, TeachingDetail
 BOOKING_TYPES = (
     ("TEACHING", "Teaching"),
     ("PERFORMANCE", "Performance"),
@@ -38,7 +38,6 @@ BUDGET_BANDS = (
     ("400-500", "400-500"),
     ("500+", "500+"),
 )
-
 
 class BookingForm(forms.Form):
     """
@@ -117,3 +116,11 @@ class BookingForm(forms.Form):
                 css_class="booking-steps",
             ),
         )
+
+class UpdateTeachingForm(forms.ModelForm):
+    """
+    Form to be used for updating a teaching Booking
+    """
+    class Meta: # pylint: disable=missing-class-docstring
+        model = TeachingDetail
+        exclude = ['booking', 'Address']

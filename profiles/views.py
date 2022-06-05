@@ -3,10 +3,13 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateView, ContextMixin
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import UserPassesTestMixin
+
 from booking.models import PerformanceDetail, TeachingDetail, EquipmentHireDetail, TeachingInstance
 from booking.models import Booking
+from booking.forms import UpdateTeachingForm
 from .models import UserProfile
-from django.contrib.auth.mixins import UserPassesTestMixin
+
 
 # Used to get relevant information for the selected page
 page_objects = {
@@ -78,7 +81,7 @@ class ProfileContextMixin(ContextMixin): # pylint: disable=too-few-public-method
 
         return calendar_object
 
-    
+
     @staticmethod
     def equipment_sort_cal(equipment, counter):
         """
@@ -119,7 +122,8 @@ class ProfileContextMixin(ContextMixin): # pylint: disable=too-few-public-method
             'numb_of_days': numb_of_days,
             'pick_up_time': detail.pick_up_time.time(),
             'return_time': detail.return_time.time(),
-            'date': f'{detail.pick_up_time.date():%A %d %B}'
+            'date': f'{detail.pick_up_time.date():%A %d %B}',
+            'booking_number': detail.booking.booking_number,
         }
 
         return overview
@@ -145,6 +149,7 @@ class ProfileContextMixin(ContextMixin): # pylint: disable=too-few-public-method
             'cost': detail.booking.cost,
             'concert_dress': detail.concert_dress,
             'description': detail.description,
+            'booking_number': detail.booking.booking_number,
         })
         detail_date = f'{detail.start.date():%d/%m/%y}'
         detail_start = f'{detail.start.time():%H:%M}'
@@ -161,7 +166,7 @@ class ProfileContextMixin(ContextMixin): # pylint: disable=too-few-public-method
     def sort_calendar(self, all_bookings) -> dict:
 
         """
-        @param p2: Queryset of all selected bookings 
+        @param p2: Queryset of all selected bookings
 
         # Get booking type
         # Get related booking details entry
@@ -250,10 +255,15 @@ class ProfilePageView(TemplateView, ProfileContextMixin):
         if self.request.user.is_superuser:
 
             all_bookings = Booking.objects.all()
-            print(all_bookings)
+            context.update({
+                'second_menu': 'includes/admin_menu.html',
+            })
         else:
             profile = get_object_or_404(UserProfile, user=self.request.user)
             all_bookings = profile.bookings.all()
+            context.update({
+                'second_menu': 'includes/standard_menu.html',
+            })
 
         for booking in all_bookings:
             if booking.booking_type.lower() == 'performance':
@@ -283,3 +293,71 @@ class ProfilePageView(TemplateView, ProfileContextMixin):
         })
 
         return context
+
+class UpdateBookingView(TemplateView, ProfileContextMixin):
+    """
+    lala
+    """
+    template_name = "profile/update_booking.html"
+
+    def get_context_data(self, **kwargs):
+        """
+        Calls mixin to fetch the correct data by passing the bookings available
+        to the user and the selected booking type
+        """
+
+        context = super().get_context_data(**kwargs)
+
+        booking_number = context['booking_number']
+        selected_booking = Booking.objects.filter(
+                booking_number=booking_number
+        )
+        # Although only one booking is being processed, this dict allows for the same method to
+        # be called as used for the profile booking page
+        booking_types = {
+            'teaching': {},
+            'performance': {},
+            'equipment': {},
+        }
+
+        overview_details: dict = self.sort_overview([selected_booking, booking_types])
+        booking_instance = ''
+
+        #Pulls the booking from dict, removing uneeded multibooking structure
+        for key, value in overview_details.items():
+            if value:
+                get_key_value_pair = list(value.items())[0]
+                booking_instance = get_key_value_pair[1]
+                break
+
+        booking_type = booking_instance.booking.booking_type.lower()
+
+        initial_form_values: dict = self.update_teaching_form(selected_booking)
+        form = UpdateTeachingForm(initial=initial_form_values)
+
+        context.update({
+                'booking': booking_instance,
+                'second_menu': 'includes/admin_menu.html',
+                'booking_type': f'includes/booking-updates/{booking_type}.html',
+                'form': form
+            })
+        return context
+
+    def update_teaching_form(self, selected_booking) -> dict:
+        """
+        @param p1: Queryset of booking selected to be updated
+
+        # Get related Detail Model for booking
+        # Go through each field in the modelForm and pull a value from the Detail model
+        # Return dict to pre-populate the modelForm with the current values
+        """
+        booking_detail = TeachingDetail.objects.filter(
+                booking=selected_booking[0].id
+        ).values()
+
+        populated_fields = {}
+        transformed_queryset = booking_detail[0]
+
+        for field in UpdateTeachingForm().fields:
+            populated_fields[field] = transformed_queryset[field]
+        return populated_fields

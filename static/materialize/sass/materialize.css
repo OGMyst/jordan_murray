@@ -2368,7 +2368,7 @@ input[type=range] + .thumb {
   background-color: #000000;
   text-align: center;
   letter-spacing: .5px;
-  transition: background-color .2s ease-out;
+  transition: background-color 0.2s cubic-bezier(0, 0.88, 0, 0.99);
   cursor: pointer; }
   .btn:hover, .btn-small:hover, .btn-large:hover {
     background-color: #0d0d0d; }

@@ -48,7 +48,7 @@ def booking(request):
             
         else:
             print (booking_form.errors)
-            print('not valid')
+
 
     context = {
         "booking_form": booking_form,

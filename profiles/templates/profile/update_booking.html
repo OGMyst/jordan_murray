@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load sass_tags %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% sass_src 'css/profile.scss' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Div present to avoid flex from base.html template -->
+<div>
+    <div class="heading">
+        <h1 class="heading-text">Update Booking</h1>
+    </div>
+    {% include second_menu %}
+    <section>
+        <div class="container">
+            <div class="content flex-center bookings-container">
+                {% include booking_type %}
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+    <script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}

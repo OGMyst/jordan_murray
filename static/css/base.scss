@@ -198,3 +198,18 @@ footer {
 .control-label {
     color: azure;
 }
+
+/* SCSS HEX */
+$indigo-dye: #134768ff;
+$magnolia: #efe9f4ff;
+$metallic-seaweed: #1e8893ff;
+$charcoal: #343f46ff;
+$charleston-green: #25292dff;
+$something-blue: #134768;
+
+/* SCSS HSL */
+$indigo-dye: hsla(203, 69%, 24%, 1);
+$magnolia: hsla(273, 33%, 94%, 1);
+$metallic-seaweed: hsla(186, 66%, 35%, 1);
+$charcoal: hsla(203, 15%, 24%, 1);
+$charleston-green: hsla(210, 10%, 16%, 1);
