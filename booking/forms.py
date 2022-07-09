@@ -124,3 +124,12 @@ class UpdateTeachingForm(forms.ModelForm):
     class Meta: # pylint: disable=missing-class-docstring
         model = TeachingDetail
         exclude = ['booking', 'Address']
+    
+    def __init__(self, *args, **kwargs):
+        """
+        Wraps fields into their relevant forms in order to manage multiple form logic
+        """
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.add_input(Button("cancel", "cancel", css_class='secondary-btn'),)
+        self.helper.add_input(Submit('submit', 'submit',))

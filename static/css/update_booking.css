@@ -1,0 +1,21 @@
+.bookings-container {
+  text-align: center; }
+  .bookings-container .info-text {
+    padding-top: 20px; }
+
+.booking-form {
+  padding-top: 20px;
+  max-width: 520px;
+  margin: auto; }
+
+.control-group {
+  display: flex;
+  justify-content: flex-end; }
+  .control-group label {
+    width: 50%;
+    text-align: left;
+    margin: auto; }
+  .control-group .controls {
+    width: unset; }
+
+/*# sourceMappingURL=update_booking.css.map */

@@ -1,4 +1,7 @@
 {% load crispy_forms_tags %}
+<h2>{{ booking.student_name }} - {{ booking.instrument|lower|capfirst }}</h2>
+<p>{{ booking.day }} {{ booking.time }}</p>
+<p class="info-text">All changes will need to be verified by me before appearing on the booking</p>
 <form class="booking-form" action="" method="post">
     {% crispy form %}
 </form>

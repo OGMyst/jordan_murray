@@ -4,7 +4,7 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% sass_src 'css/profile.scss' %}">
+<link rel="stylesheet" href="{% sass_src 'css/update_booking.scss' %}">
 {% endblock %}
 
 {% block content %}
@@ -16,7 +16,7 @@
     {% include second_menu %}
     <section>
         <div class="container">
-            <div class="content flex-center bookings-container">
+            <div class="content bookings-container">
                 {% include booking_type %}
             </div>
         </div>

@@ -1,9 +1,7 @@
-from array import array
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views.generic.base import TemplateView, ContextMixin
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import UserPassesTestMixin
 
 from booking.models import PerformanceDetail, TeachingDetail, EquipmentHireDetail, TeachingInstance
 from booking.models import Booking
@@ -11,7 +9,7 @@ from booking.forms import UpdateTeachingForm
 from .models import UserProfile
 
 
-# Used to get relevant information for the selected page
+# Used to differentiate between booking type models 
 page_objects = {
     "teaching": {
         "b_type": "TEACHING",
@@ -35,10 +33,10 @@ page_objects = {
     },
 }
 
-class ProfileContextMixin(ContextMixin): # pylint: disable=too-few-public-methods
+class ProfileContextMixin(ContextMixin):
     """
-    gets bookings by type and filtered by user.
-    if user is a superuser then all bookings of selected type are returned
+    Processes Querysets for Booking models to put
+    them into more usuable formats on the frontend
     """
     @staticmethod
     def teaching_sort_cal(detail, counter):
@@ -80,7 +78,6 @@ class ProfileContextMixin(ContextMixin): # pylint: disable=too-few-public-method
         }
 
         return calendar_object
-
 
     @staticmethod
     def equipment_sort_cal(equipment, counter):
@@ -198,7 +195,7 @@ class ProfileContextMixin(ContextMixin): # pylint: disable=too-few-public-method
         return calendar
 
 
-    def sort_overview(self, all_data: array) -> dict:
+    def sort_overview(self, all_data) -> dict:
 
         """
         @param p2: [Queryset of all selected bookings, Dict of booking types]
@@ -298,6 +295,7 @@ class UpdateBookingView(TemplateView, ProfileContextMixin):
     """
     lala
     """
+    form_class = UpdateTeachingForm
     template_name = "profile/update_booking.html"
 
     def get_context_data(self, **kwargs):
@@ -361,3 +359,18 @@ class UpdateBookingView(TemplateView, ProfileContextMixin):
         for field in UpdateTeachingForm().fields:
             populated_fields[field] = transformed_queryset[field]
         return populated_fields
+
+    def post(self, request, booking_number):
+        """
+        lala
+        """
+        related_booking = Booking.objects.get(booking_number=booking_number)
+        booking_type_model = page_objects[related_booking.booking_type.lower()]['model']
+        teaching = get_object_or_404(booking_type_model, booking=related_booking.id)
+        form = UpdateTeachingForm(request.POST, instance=teaching)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('profile'))
+
+        return render(request, self.template_name, {'form':form})
+    

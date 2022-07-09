@@ -1,0 +1,30 @@
+.bookings-container {
+    text-align: center;
+
+    .info-text{
+        padding-top: 20px;
+    }
+}
+
+.booking-form {
+    padding-top: 20px;
+    max-width: 520px;
+    margin: auto;
+}
+
+.control-group {
+    display: flex;
+    justify-content: flex-end;
+
+    label{
+        width: 50%;
+        text-align: left;
+        margin: auto;
+    }
+
+    .controls{
+        width: unset;
+    }
+  }
+
+
