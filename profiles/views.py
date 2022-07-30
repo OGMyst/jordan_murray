@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from booking.models import PerformanceDetail, TeachingDetail, EquipmentHireDetail, TeachingInstance
 from booking.models import Booking
-from booking.forms import UpdateTeachingForm
+from booking.forms import UpdateTeachingForm, UpdatePerformanceForm, UpdateEquipmentForm
 from .models import UserProfile
 
 
@@ -291,6 +291,7 @@ class ProfilePageView(TemplateView, ProfileContextMixin):
 
         return context
 
+# STILL NEED TO ADD UPDATE BOOKING TEMPLATES FOR PERFORMANCE AND EQUIPMENT
 class UpdateBookingView(TemplateView, ProfileContextMixin):
     """
     lala
@@ -310,6 +311,7 @@ class UpdateBookingView(TemplateView, ProfileContextMixin):
         selected_booking = Booking.objects.filter(
                 booking_number=booking_number
         )
+        print(list(selected_booking)[0].booking_type)
         # Although only one booking is being processed, this dict allows for the same method to
         # be called as used for the profile booking page
         booking_types = {
@@ -318,6 +320,30 @@ class UpdateBookingView(TemplateView, ProfileContextMixin):
             'equipment': {},
         }
 
+        update_form_methods = {
+            'teaching': 'update_teaching_form',
+            'performance': 'update_performance_form',
+            'equipment': 'update_equipment_form',
+        }
+
+        booking_type = list(selected_booking)[0].booking_type.lower()
+        if booking_type == 'performance':
+            booking_types['performance'].update({
+                list(selected_booking)[0].id:{
+                    'dates_and_times': {
+                        'rehearsal': {
+                            'dropdown': 0,
+                            'slots':{
+                            }
+                        },
+                        'performance': {
+                            'dropdown': 0,
+                            'slots':{
+                            }
+                        }
+                    }
+                }
+            })
         overview_details: dict = self.sort_overview([selected_booking, booking_types])
         booking_instance = ''
 
@@ -328,10 +354,17 @@ class UpdateBookingView(TemplateView, ProfileContextMixin):
                 booking_instance = get_key_value_pair[1]
                 break
 
-        booking_type = booking_instance.booking.booking_type.lower()
+        initial_form_values: dict = getattr(
+            self,
+            update_form_methods[booking_type]
+            )(selected_booking)
 
-        initial_form_values: dict = self.update_teaching_form(selected_booking)
-        form = UpdateTeachingForm(initial=initial_form_values)
+        update_forms = {
+            'teaching': UpdateTeachingForm(initial=initial_form_values),
+            'performance': UpdatePerformanceForm(initial=initial_form_values),
+            'equipment': UpdateEquipmentForm(initial=initial_form_values),
+        }
+        form = update_forms[booking_type]
 
         context.update({
                 'booking': booking_instance,
@@ -359,6 +392,44 @@ class UpdateBookingView(TemplateView, ProfileContextMixin):
         for field in UpdateTeachingForm().fields:
             populated_fields[field] = transformed_queryset[field]
         return populated_fields
+    
+    def update_performance_form(self, selected_booking) -> dict:
+        """
+        @param p1: Queryset of booking selected to be updated
+
+        # Get related Detail Model for booking
+        # Go through each field in the modelForm and pull a value from the Detail model
+        # Return dict to pre-populate the modelForm with the current values
+        """
+        booking_detail = PerformanceDetail.objects.filter(
+                booking=selected_booking[0].id
+        ).values()
+
+        populated_fields = {}
+        transformed_queryset = booking_detail[0]
+
+        for field in UpdatePerformanceForm().fields:
+            populated_fields[field] = transformed_queryset[field]
+        return populated_fields
+    
+    def update_equipment_form(self, selected_booking) -> dict:
+        """
+        @param p1: Queryset of booking selected to be updated
+
+        # Get related Detail Model for booking
+        # Go through each field in the modelForm and pull a value from the Detail model
+        # Return dict to pre-populate the modelForm with the current values
+        """
+        booking_detail = EquipmentHireDetail.objects.filter(
+                booking=selected_booking[0].id
+        ).values()
+
+        populated_fields = {}
+        transformed_queryset = booking_detail[0]
+
+        for field in UpdateEquipmentForm().fields:
+            populated_fields[field] = transformed_queryset[field]
+        return populated_fields
 
     def post(self, request, booking_number):
         """
@@ -367,7 +438,12 @@ class UpdateBookingView(TemplateView, ProfileContextMixin):
         related_booking = Booking.objects.get(booking_number=booking_number)
         booking_type_model = page_objects[related_booking.booking_type.lower()]['model']
         teaching = get_object_or_404(booking_type_model, booking=related_booking.id)
-        form = UpdateTeachingForm(request.POST, instance=teaching)
+        update_forms = {
+            'teaching': UpdateTeachingForm(request.POST, instance=teaching),
+            'performance': UpdatePerformanceForm(request.POST, instance=teaching),
+            'equipment': UpdateEquipmentForm(request.POST, instance=teaching),
+        }
+        form = update_forms[related_booking.booking_type.lower()]
         if form.is_valid():
             form.save()
             return redirect(reverse('profile'))

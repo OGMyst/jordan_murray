@@ -3,7 +3,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Button, Div, Submit, HTML, Field
 from crispy_forms.bootstrap import FormActions
 from django.contrib.postgres.forms import SimpleArrayField, SplitArrayField
-from .models import Booking, TeachingDetail
+from .models import Booking, EquipmentHireDetail, PerformanceDetail, TeachingDetail
 BOOKING_TYPES = (
     ("TEACHING", "Teaching"),
     ("PERFORMANCE", "Performance"),
@@ -123,6 +123,40 @@ class UpdateTeachingForm(forms.ModelForm):
     """
     class Meta: # pylint: disable=missing-class-docstring
         model = TeachingDetail
+        exclude = ['booking', 'Address']
+    
+    def __init__(self, *args, **kwargs):
+        """
+        Wraps fields into their relevant forms in order to manage multiple form logic
+        """
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.add_input(Button("cancel", "cancel", css_class='secondary-btn'),)
+        self.helper.add_input(Submit('submit', 'submit',))
+
+class UpdatePerformanceForm(forms.ModelForm):
+    """
+    Form to be used for updating a teaching Booking
+    """
+    class Meta: # pylint: disable=missing-class-docstring
+        model = PerformanceDetail
+        exclude = ['booking', 'Address']
+    
+    def __init__(self, *args, **kwargs):
+        """
+        Wraps fields into their relevant forms in order to manage multiple form logic
+        """
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.add_input(Button("cancel", "cancel", css_class='secondary-btn'),)
+        self.helper.add_input(Submit('submit', 'submit',))
+
+class UpdateEquipmentForm(forms.ModelForm):
+    """
+    Form to be used for updating a teaching Booking
+    """
+    class Meta: # pylint: disable=missing-class-docstring
+        model = EquipmentHireDetail
         exclude = ['booking', 'Address']
     
     def __init__(self, *args, **kwargs):
