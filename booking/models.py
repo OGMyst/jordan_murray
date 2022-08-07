@@ -42,7 +42,7 @@ class AdminContact(models.Model):
 
 class Booking(models.Model):
     """
-    Stores booking information from enquiry stage
+    Booking is a created once a request has been confirmed
     """
     booking_number = models.CharField(max_length=32, null=False, editable=False)
     booking_type = models.CharField(max_length=32, choices=BOOKING_TYPES)
@@ -50,10 +50,13 @@ class Booking(models.Model):
     contact_name = models.CharField(max_length=50)
     booking_name = models.CharField(max_length=50, blank=True,)
     date_submitted = models.DateField(default=datetime.date.today)
-    booking_details = models.JSONField(encoder=None, decoder=None)
-    userprofile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True, related_name='bookings')
+    userprofile = models.ForeignKey(
+        UserProfile,
+        on_delete=models.CASCADE,
+        null=True, blank=True,
+        related_name='bookings'
+        )
     cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    confirmed = models.BooleanField(default=False)
 
     def _generate_booking_number(self):
         """
@@ -72,6 +75,42 @@ class Booking(models.Model):
 
     def __str__(self):
         return self.contact_name + " - " + self.booking_name
+
+class Request(models.Model):
+    """
+    Requests are used to store booking requests until they are confirmed or denied.
+    A confirmed request becomes a booking.
+    """
+    request_number = models.CharField(max_length=32, null=False, editable=False)
+    booking_type = models.CharField(max_length=32, choices=BOOKING_TYPES)
+    contact_email = models.EmailField(max_length=254)
+    contact_name = models.CharField(max_length=50)
+    date_submitted = models.DateField(default=datetime.date.today)
+    booking_details = models.JSONField(encoder=None, decoder=None)
+    userprofile = models.ForeignKey(
+        UserProfile,
+        on_delete=models.CASCADE,
+        null=True, blank=True,
+        related_name='request'
+        )
+
+    def _generate_request_number(self):
+        """
+        Generate a random, unique request number using UUID
+        """
+        return uuid.uuid4().hex.upper()
+
+    def save(self, *args, **kwargs):
+        """
+        Override the original save method to set the request number
+        if it hasn't been set already.
+        """
+        if not self.request_number:
+            self.request_number = self._generate_request_number()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.booking_type + " - " + self.request_number
 class PerformanceDetail(models.Model):
     """
     Bookings for performances have specific details which separate them from the other booking types
@@ -85,8 +124,6 @@ class PerformanceDetail(models.Model):
     start = models.DateTimeField(blank=True, null=True)
     finish = models.DateTimeField(blank=True, null=True)
     concert_dress = models.CharField(max_length=254, blank=True)
-
-
 class EquipmentHireDetail(models.Model):
     """
     Bookings for equipment hire have specific details
@@ -122,7 +159,6 @@ class TeachingDetail(models.Model):
 
     def __str__(self):
         return self.student_name + " - " + self.instrument.lower().capitalize()
-
 class TeachingInstance(models.Model):
     """
     Encapsulates information relevant to individual lessons

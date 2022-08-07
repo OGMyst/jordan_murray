@@ -22,7 +22,6 @@ def booking(request):
         booking_form = BookingForm(request.POST)
 
         if booking_form.is_valid():
-            print('is valid')
 
             #Remove fields not belonging to the booking details field
             booking_type = cleaned_form['service']
