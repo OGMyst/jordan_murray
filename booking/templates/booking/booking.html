@@ -13,7 +13,7 @@
     <h1 class="heading-text">Make a Booking</h1>
 </div>
 <form class="booking-form" action="{% url 'booking' %}" method="post">
-    {% crispy booking_form %}
+    {% crispy request_form %}
 </form>
 {% endblock %}
 

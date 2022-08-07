@@ -3,7 +3,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Button, Div, Submit, HTML, Field
 from crispy_forms.bootstrap import FormActions
 from django.contrib.postgres.forms import SimpleArrayField, SplitArrayField
-from .models import Booking, EquipmentHireDetail, PerformanceDetail, TeachingDetail
+from .models import Request, EquipmentHireDetail, PerformanceDetail, TeachingDetail
 BOOKING_TYPES = (
     ("TEACHING", "Teaching"),
     ("PERFORMANCE", "Performance"),
@@ -39,13 +39,13 @@ BUDGET_BANDS = (
     ("500+", "500+"),
 )
 
-class BookingForm(forms.Form):
+class RequestForm(forms.Form):
     """
     Starting form will be the only visible form on page load.
     After user has selected a service the relevant form will be shown
     """
     class Meta:
-        model = Booking
+        model = Request
 
     # Starting form
     name = forms.CharField(label="Full name", max_length=50)

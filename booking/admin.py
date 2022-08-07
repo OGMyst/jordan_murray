@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Booking, AdminContact, PerformanceDetail
+from .models import Booking, AdminContact, PerformanceDetail, Request
 from .models import EquipmentHireDetail, TeachingDetail, TeachingInstance
 
 
@@ -36,7 +36,7 @@ class PerformanceDetailAdmin(admin.ModelAdmin):
 
 admin.site.register([
     Booking, AdminContact, EquipmentHireDetail,
-    TeachingInstance
+    TeachingInstance, Request
     ])
 
 admin.site.register(TeachingDetail, TeachingDetailsAdmin)

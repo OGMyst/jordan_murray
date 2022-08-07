@@ -2,55 +2,57 @@ import json
 import copy
 from django.shortcuts import render
 
-from booking.models import Booking
-from .forms import BookingForm
+from booking.models import Request
+from .forms import RequestForm
 
 
 
 def booking(request):
     """A view to return the booking page"""
 
-    booking_form = BookingForm()
+    request_form = RequestForm()
 
     # Get values for field which appear across all models. JSONify the rest
     if request.method == 'POST':
         submitted_form = copy.copy(request.POST)
 
-        #Removes empty values from unsused forms
+        #timefields are submitted with AM/PM which isn't accepted by validator
+        for field in submitted_form:
+            if 'time' in field:
+                submitted_form[field] = (submitted_form[field])[:-2].strip()
+
+        #Removes empty fields from form.
+        #required as form has fields for models other than request
         cleaned_form = {k: v for k, v in submitted_form.items() if v}
         cleaned_form.pop('submit')
-        booking_form = BookingForm(request.POST)
 
-        if booking_form.is_valid():
+        request_form = RequestForm(submitted_form)
+
+        if request_form.is_valid():
 
             #Remove fields not belonging to the booking details field
             booking_type = cleaned_form['service']
             contact_email = cleaned_form['email']
             contact_name = cleaned_form['name']
-
             cleaned_form.pop('service')
             cleaned_form.pop('email')
             cleaned_form.pop('name')
 
             # Service specifc fields are stored in a JSON field
             booking_details = json.dumps(cleaned_form)
-            
-            booked = Booking(
+
+            booking_request = Request(
                 booking_type = booking_type,
                 contact_email =  contact_email,
                 contact_name =  contact_name,
                 booking_details = booking_details,
             )
-            booked.save()
+            booking_request.save()
             template = "booking/thank you.html"
             return render(request, template)
-            
-        else:
-            print (booking_form.errors)
-
 
     context = {
-        "booking_form": booking_form,
+        "request_form": request_form,
     }
 
     template = "booking/booking.html"
