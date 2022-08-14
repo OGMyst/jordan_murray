@@ -35,13 +35,14 @@
     height: calc(100vh / 3 - 31px);
     text-align: center;
     h1{
-        padding-top:300px;
+        padding-top:calc(50vh - 350px);;
     }
 }
 
 .thank-you-container{
     height: calc((100vh/3)*2);
     text-align: center;
+    width: 100%;
     p{
         max-width: 50%;
         margin: auto;

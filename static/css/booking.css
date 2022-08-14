@@ -29,7 +29,7 @@
   height: calc(100vh / 3 - 31px);
   text-align: center; }
   .heading h1 {
-    padding-top: 300px; }
+    padding-top: calc(50vh - 350px); }
 
 .thank-you-container {
   height: calc((100vh/3)*2);

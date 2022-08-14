@@ -20,7 +20,7 @@
 /* Clock Digital Display */
 .timepicker-digital-display {
 //   flex: 1 auto;
-  background-color: $secondary-color;
+  background-color: $datetimepicker-bg; //$secondary-color;
   padding: 10px;
   font-weight: 300;
 }

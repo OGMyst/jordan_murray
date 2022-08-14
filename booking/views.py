@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 import copy
 from django.shortcuts import render
@@ -15,11 +16,6 @@ def booking(request):
     # Get values for field which appear across all models. JSONify the rest
     if request.method == 'POST':
         submitted_form = copy.copy(request.POST)
-
-        #timefields are submitted with AM/PM which isn't accepted by validator
-        for field in submitted_form:
-            if 'time' in field:
-                submitted_form[field] = (submitted_form[field])[:-2].strip()
 
         #Removes empty fields from form.
         #required as form has fields for models other than request

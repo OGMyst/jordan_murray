@@ -10,7 +10,6 @@ let formType = {
 // Selected service determines which fields should be shown for the second step
 $('#id_service').change(function(){
     selectedService = $('#id_service').val().toLowerCase()
-
 })
 
 // Using selected service, when the user selects the next button the second step of the form is shown
@@ -37,7 +36,8 @@ function materializeDatetimePicker(){
             break;
         case 'performance':
             $('.time-picker').timepicker();
-            $('.date-picker').datepicker();          
+            $('.date-picker').datepicker();    
+            $('.date-picker')[0].M_Datepicker.options.format = "mm/dd/yyyy"       
             makeTimeValid();
             break;
         case 'equipment':

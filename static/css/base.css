@@ -113,8 +113,6 @@ footer {
   min-height: calc(100vh - 31.8px);
   display: flex;
   justify-content: center; }
-  .main-content div {
-    width: 100%; }
 
 .page-header {
   font-size: 60px; }

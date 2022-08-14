@@ -3761,7 +3761,7 @@ input[type=range]::-ms-thumb {
 /* Date Display */
 .datepicker-date-display {
   flex: 1 auto;
-  background-color: #000000;
+  background-color: #253a59;
   color: #fff;
   padding: 20px 22px;
   font-weight: 500; }
@@ -3867,7 +3867,7 @@ input[type=range]::-ms-thumb {
 
 /* Clock Digital Display */
 .timepicker-digital-display {
-  background-color: #000000;
+  background-color: #253a59;
   padding: 10px;
   font-weight: 300; }
 
